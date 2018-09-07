@@ -1,21 +1,28 @@
 {
-  "name": "@coreui/coreui-free-angular-admin-template",
-  "version": "2.0.0",
-  "description": "CoreUI Free Angular 2+ Admin Template",
+  "name": "@wigo4it/fieldlab-portal",
+  "version": "0.1.0",
+  "description": "Wigo4it Portal, contribution to FieldLab Dienstverlening 2018",
   "author": {
-    "name": "Łukasz Holeczek",
-    "url": "http://holeczek.pl",
-    "github": "https://github.com/mrholek",
-    "twitter": "https://twitter.com/lukaszholeczek"
+    "name": "Wigo4it",
+    "url": "http://www.wigo4it.nl",
+    "github": "https://github.com/wigo4it"
   },
   "contributors": [
     {
-      "name": "Andrzej Kopański",
-      "url": "https://github.com/xidedix"
+      "name": "Sjef van Leeuwen",
+      "url": "https://github.com/sjefvanleeuwen"
+    },
+    {
+      "name": "Marco Wiggelinkhuizen",
+      "url": "https://github.com/marcowig"
+    },
+    {
+      "name": "Andrew Bogels",
+      "url": "https://github.com/bogelsa"
     }
   ],
-  "homepage": "https://coreui.io/angular",
-  "copyright": "Copyright 2018 creativeLabs Łukasz Holeczek",
+  "homepage": "http://www.wigo4it.nl",
+  "copyright": "Copyright 2018 Wigo4it",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
