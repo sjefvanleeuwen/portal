@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
+import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 
 @Component({
   templateUrl: 'dashboard.component.html'
@@ -10,15 +11,18 @@ export class DashboardComponent implements OnInit {
 
   radioModel: string = 'Month';
 
-  // lineChart1
-  public lineChart1Data: Array<any> = [
+  // SignalR
+  public SignalRData: Array<any> = [
     {
-      data: [65, 59, 84, 84, 51, 55, 40],
+      data: [25, 59, 84, 84, 51, 55, 40],
       label: 'Series A'
     }
   ];
-  public lineChart1Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChart1Options: any = {
+
+  public SignalRNotifications : any = 0;
+
+  public SignalRLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public SignalROptions: any = {
     tooltips: {
       enabled: false,
       custom: CustomTooltips
@@ -59,19 +63,19 @@ export class DashboardComponent implements OnInit {
       display: false
     }
   };
-  public lineChart1Colours: Array<any> = [
+  public SignalRColours: Array<any> = [
     {
       backgroundColor: getStyle('--primary'),
       borderColor: 'rgba(255,255,255,.55)'
     }
   ];
-  public lineChart1Legend = false;
-  public lineChart1Type = 'line';
+  public SignalRLegend = false;
+  public SignalRType = 'line';
 
   // lineChart2
   public lineChart2Data: Array<any> = [
     {
-      data: [1, 18, 9, 17, 34, 22, 11],
+      data: [10, 18, 9, 17, 34, 22, 11],
       label: 'Series A'
     }
   ];
@@ -378,6 +382,8 @@ export class DashboardComponent implements OnInit {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
+  public hubConnection: HubConnection
+
   ngOnInit(): void {
     // generate random values for mainChart
     for (let i = 0; i <= this.mainChartElements; i++) {
@@ -385,5 +391,18 @@ export class DashboardComponent implements OnInit {
       this.mainChartData2.push(this.random(80, 100));
       this.mainChartData3.push(65);
     }
+
+    this.hubConnection = new HubConnectionBuilder()
+      .withUrl("http://localhost:5051/eventhub")
+      .build();
+    this.hubConnection.start().catch(err => document.write(err)).then(()=>{
+      this.hubConnection.invoke("Subscribe", "topic")
+    });
+    this.hubConnection.on("publishmessage", (topic: string, message: string) =>
+    {
+      this.SignalRNotifications++
+      console.log(topic + ": "+ message);
+
+    });
   }
 }

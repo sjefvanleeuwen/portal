@@ -14,17 +14,17 @@
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </div>
-          <div class="text-value">9.823</div>
-          <div>Members online</div>
+          <div  ng-bind="SignalRNotifications" class="text-value">{{SignalRNotifications}}</div>
+          <div>Notifications</div>
         </div>
         <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
           <canvas baseChart class="chart"
-          [datasets]="lineChart1Data"
-          [labels]="lineChart1Labels"
-          [options]="lineChart1Options"
-          [colors]="lineChart1Colours"
-          [legend]="lineChart1Legend"
-          [chartType]="lineChart1Type"></canvas>
+          [datasets]="SignalRData"
+          [labels]="SignalRLabels"
+          [options]="SignalROptions"
+          [colors]="SignalRColours"
+          [legend]="SignalRLegend"
+          [chartType]="SignalRType"></canvas>
         </div>
       </div>
     </div><!--/.col-->
