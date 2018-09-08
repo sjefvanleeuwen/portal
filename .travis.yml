@@ -2,25 +2,14 @@ sudo: true
 dist: xenial
 language: node_js
 
-cache:
-  directories:
-    - node_modules
-
-addons:
-  chrome: stable
-
 node_js:
   - "8"
-
-matrix:
-  fast_finish: true
 
 before_install:
   - npm install chalk
   - npm install each-async
   - npm install indent-string
   - npm install npm@5 -g
-  - npm cache verify
   - npm prune
   - npm update
 
