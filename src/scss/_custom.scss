@@ -18,3 +18,23 @@
 .bg-gegevenslaag{
     background-color: #cccccc;
 }
+
+.brand-legend {
+    margin-bottom: 1.5em;
+    @extend .small;
+    @extend .text-uppercase;
+    @extend .text-muted;
+    @extend .text-center;
+} 
+
+.brand-card + .brand-legend {
+    margin-top: -1.5em;
+}
+
+.card-footer .btn {
+    margin-right: 8px;
+}
+
+.form-group {
+    height: 3rem;
+}
