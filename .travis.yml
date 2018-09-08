@@ -2,6 +2,9 @@ sudo: true
 dist: xenial
 language: node_js
 
+addons:
+  chrome: stable
+
 node_js:
   - "8"
 
