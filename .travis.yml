@@ -16,6 +16,9 @@ matrix:
   fast_finish: true
 
 before_install:
+  - npm install chalk
+  - npm install each-async
+  - npm install indent-string
   - npm install npm@5 -g
   - npm cache verify
   - npm prune
