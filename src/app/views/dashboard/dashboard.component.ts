@@ -73,17 +73,17 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.hubConnection = new HubConnectionBuilder()
-    //   .withUrl('http://localhost:5051/eventhub')
-    //   .build();
+    this.hubConnection = new HubConnectionBuilder()
+      .withUrl('http://localhost:5051/eventhub')
+      .build();
 
-    // this.hubConnection.start().catch(err => document.write(err)).then(() => {
-    //   this.hubConnection.invoke('Subscribe', 'topic');
-    // });
+    this.hubConnection.start().catch(err => document.write(err)).then(() => {
+      this.hubConnection.invoke('Subscribe', 'topic');
+    });
 
-    // this.hubConnection.on('publishmessage', (topic: string, message: string) => {
-    //   this.SignalRNotifications++;
-    //   console.log(topic + ': ' + message);
-    // });
+    this.hubConnection.on('publishmessage', (topic: string, message: string) => {
+      this.SignalRNotifications++;
+      console.log(topic + ': ' + message);
+    });
   }
 }
