@@ -14,8 +14,9 @@
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </div>
-          <div  ng-bind="SignalRNotifications" class="text-value">{{SignalRNotifications}}</div>
-          <div>Notifications</div>
+          <div class="text-value">{{SignalRNotifications}}</div>
+          <div>{{SignalRNotificationsData}}</div>
+          <div>{{SignalRNotificationsData2}}</div>
         </div>
         <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
           <canvas baseChart class="chart"
@@ -27,6 +28,7 @@
           [chartType]="SignalRType"></canvas>
         </div>
       </div>
+      <button (click)="choicePass()">Cick</button>
     </div><!--/.col-->
   </div>
   <!--/.card-->

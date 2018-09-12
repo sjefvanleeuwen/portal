@@ -1,3 +1,4 @@
+import { BrpPersoon } from './../../models/dto/brp/brpPersoon';
 import { Component, OnInit } from '@angular/core';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
@@ -17,6 +18,8 @@ export class DashboardComponent implements OnInit {
   ];
 
   public SignalRNotifications: any = 0;
+  public SignalRNotificationsData: any = "";
+  public SignalRNotificationsData2: any = "";
 
   public SignalRLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   public SignalROptions: any = {
@@ -70,6 +73,13 @@ export class DashboardComponent implements OnInit {
   public SignalRType = 'line';
 
   public hubConnection: HubConnection;
+  public processData: string = '{ "processid" : 5, "passchoice" : 1}';
+  
+  public choicePass(): void {
+    var o = JSON.parse(this.processData);
+    o.passChoice = 1;
+    this.hubConnection.invoke('publishmessage', 'topic2', "",JSON.stringify(o));
+  }
 
   ngOnInit(): void {
 
@@ -81,9 +91,13 @@ export class DashboardComponent implements OnInit {
       this.hubConnection.invoke('Subscribe', 'topic');
     });
 
-    this.hubConnection.on('publishmessage', (topic: string, message: string) => {
+    this.hubConnection.on('publishmessage', (topic: string, message: string, data: string, processdata :string) => {
       this.SignalRNotifications++;
-      console.log(topic + ': ' + message);
+      this.processData = processdata;
+      console.log(topic + ': ' +processdata + ": " + message + " -> " + data);
+      var p = JSON.parse(data);
+      this.SignalRNotificationsData = p.value.voornamen + " " + p.value.geslachtsnaam
+      this.SignalRNotificationsData2 = p.value.partner[0].voornamen + " " + p.value.geslachtsnaam;
     });
   }
 }
