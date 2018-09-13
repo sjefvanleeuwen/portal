@@ -73,12 +73,12 @@ export class DashboardComponent implements OnInit {
   public SignalRType = 'line';
 
   public hubConnection: HubConnection;
-  public processData: string = '{ "processid" : 5, "passchoice" : 1}';
+  public processData: string = "";
   
   public choicePass(): void {
     var o = JSON.parse(this.processData);
     o.passChoice = 1;
-    this.hubConnection.invoke('publishmessage', 'topic2', "",JSON.stringify(o));
+    this.hubConnection.invoke('publishmessage', 'humanTask', "",JSON.stringify(o),this.processData);
   }
 
   ngOnInit(): void {
