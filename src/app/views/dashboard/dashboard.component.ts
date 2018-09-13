@@ -2,8 +2,7 @@ import { BrpPersoon } from './../../models/dto/brp/brpPersoon';
 import { Component, OnInit } from '@angular/core';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
-import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
-
+import { global } from '../../globals';
 @Component({
   templateUrl: 'dashboard.component.html'
 })
@@ -72,26 +71,17 @@ export class DashboardComponent implements OnInit {
   public SignalRLegend = false;
   public SignalRType = 'line';
 
-  public hubConnection: HubConnection;
   public processData: string = "";
   
   public choicePass(): void {
     var o = JSON.parse(this.processData);
     o.passChoice = 1;
-    this.hubConnection.invoke('publishmessage', 'humanTask', "",JSON.stringify(o),this.processData);
+    global.signalr.hubConnection.invoke('publishmessage', 'humanTask', "",JSON.stringify(o),this.processData);
   }
 
   ngOnInit(): void {
-
-    this.hubConnection = new HubConnectionBuilder()
-      .withUrl('http://localhost:5051/eventhub')
-      .build();
-
-    this.hubConnection.start().catch(err => document.write(err)).then(() => {
-      this.hubConnection.invoke('Subscribe', 'topic');
-    });
-
-    this.hubConnection.on('publishmessage', (topic: string, message: string, data: string, processdata :string) => {
+    console.log("on init");
+    global.signalr.hubConnection.on('publishmessage', (topic: string, message: string, data: string, processdata :string) => {
       this.SignalRNotifications++;
       this.processData = processdata;
       console.log(topic + ': ' +processdata + ": " + message + " -> " + data);
