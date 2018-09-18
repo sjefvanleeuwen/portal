@@ -1,0 +1,49 @@
+
+    <ngx-spinner
+    bdColor = "rgba(51, 51, 51, 0.8)" size = "large" color = "#fff" type = "ball-clip-rotate-pulse"
+    ></ngx-spinner>
+<div class="animated fadeIn">
+   
+  <h1>Processen</h1>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Start een proces</strong>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="countryForm" action="" method="post" class="form-horizontal ng-pristine ng-valid">
+            <div class="form-group row">
+              <label class="col-md-2 col-form-label" for="processInput">payload</label>
+              <div class="col-md-9">
+                <input class="form-control" id="text-input" name="text-input" placeholder="Text" type="text" value='{"topicid":"topic","notificationmessage":"startprocessmessage","handleUserResponse":true}'>
+                <span class="help-block small">The payload accepted must be in JSON format using a key/value pair
+                  format</span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2 col-form-label" for="processInput">business key</label>
+              <div class="col-md-9">
+                <input class="form-control" id="text-input" name="text-input" placeholder="Enter your unique reference" type="text" value=''>
+                <span class="help-block small">The business key is your unique reference
+                  format</span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2 col-form-label" for="processInput">proces</label>
+              <div class="col-md-9">
+                  <div (click)="handleclick()" class="input-group-prepend"><span class="input-group-text"><i class="fa fa-user"></i></span></div>
+                <select formControlName="countryControl" class="form-control" id="selectProcess" name="selectProcess">
+                    <option [value]="processDefinition" *ngFor="let processDefinition of processDefinitions">{{processDefinition.name}}</option>
+                </select></div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button (click)="start()" type="submit" class="btn btn-sm btn-success"><i class="fa fa-dot-circle-o"></i> Start</button>
+          <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
