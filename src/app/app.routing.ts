@@ -55,6 +55,10 @@ export const routes: Routes = [
         loadChildren: './views/stadspas/stadspas.module#StadspasModule'
       },
       {
+        path: 'processes',
+        loadChildren: './views/camunda/camunda.module#CamundaModule'
+      },
+      {
         path: 'dashboard',
         loadChildren: './views/dashboard/dashboard.module#DashboardModule'
       }
