@@ -1,24 +1,29 @@
 import { BrpPersoon } from './../../models/dto/brp/brpPersoon';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, ChangeDetectionStrategy, NgZone } from '@angular/core';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { global } from '../../globals';
+import { MessageService } from '../../services/message.service';
+import { Subscription } from 'rxjs';
+
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: 'dashboard.component.html'
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
+  public HumanTasks: string;
 
-  // SignalR
   public SignalRData: Array<any> = [
     {
       data: [25, 59, 84, 84, 51, 55, 40],
       label: 'Series A'
     }
   ];
-
+  message: any;
+  subscription: Subscription;
   public SignalRNotifications: any = 0;
-  public SignalRNotificationsData: any = "";
-  public SignalRNotificationsData2: any = "";
+  public SignalRNotificationsData: any = '';
+  public SignalRNotificationsData2: any = '';
 
   public SignalRLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   public SignalROptions: any = {
@@ -71,23 +76,56 @@ export class DashboardComponent implements OnInit {
   public SignalRLegend = false;
   public SignalRType = 'line';
 
-  public processData: string = "";
-  
+  a: any;
+
+  public processData = '';
+
   public choicePass(): void {
-    var o = JSON.parse(this.processData);
+    const o = JSON.parse(this.processData);
     o.passChoice = 1;
-    global.signalr.hubConnection.invoke('publishmessage', 'humanTask', "",JSON.stringify(o),this.processData);
+    global.signalr.hubConnection.invoke('publishmessage', 'humanTask', '', JSON.stringify(o), this.processData);
+  }
+
+  setHumanTasks(value: string): void {
+    this.HumanTasks = value;
+  }
+  constructor(private messageService: MessageService) {
+   // this.subscription = this.messageService.getMessage().subscribe(message => { this.message = message; console.log('message');});
+
+    // global.signalr.hubConnection.on('publishmessage', (topic: string, message: string, data: string, processdata: string) => {
+    //   this.HumanTasks = data;
+    //   if (topic = 'dashboard-human-tasks') {
+    //     console.log(topic + ': okthen' + processdata + ': ' + message + ' -> ' + data);
+    //   }
+    //  });
+
+  }
+
+
+  ngOnDestroy(): void {
   }
 
   ngOnInit(): void {
-    console.log("on init");
-    global.signalr.hubConnection.on('publishmessage', (topic: string, message: string, data: string, processdata :string) => {
-      this.SignalRNotifications++;
-      this.processData = processdata;
-      console.log(topic + ': ' +processdata + ": " + message + " -> " + data);
-      var p = JSON.parse(data);
-      this.SignalRNotificationsData = p.value.voornamen + " " + p.value.geslachtsnaam
-      this.SignalRNotificationsData2 = p.value.partner[0].voornamen + " " + p.value.geslachtsnaam;
-    });
+    // global.signalr.hubConnection.on('connected', () => {
+      // this.HumanTasks = 'connected';
+      // global.signalr.hubConnection.invoke('Subscribe', 'dashboard-human-tasks');
+   // });
+
+    // global.signalr.hubConnection = new HubConnectionBuilder()
+    // .withUrl('http://localhost:5051/eventhub')
+    // .build();
+    // this.hub.start().catch(err => document.write('Error connecting to signalr eventhub')).then(() => {
+    //   console.log('connected');
+    //   this.hub.invoke('Subscribe', 'dashboard-human-tasks');
+    // });
+
+    console.log('on init');
+
+      // this.SignalRNotifications++;
+      // this.processData = processdata;
+      // console.log(topic + ': ' + processdata + ': ' + message + ' -> ' + data);
+      // const p = JSON.parse(data);
+      // this.SignalRNotificationsData = p.value.voornamen + ' ' + p.value.geslachtsnaam;
+      // this.SignalRNotificationsData2 = p.value.partner[0].voornamen + ' ' + p.value.geslachtsnaam;
   }
 }
