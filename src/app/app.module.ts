@@ -1,3 +1,4 @@
+import { MessageService } from './services/message.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
@@ -5,6 +6,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { NotifyModule } from 'ngx-notify';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -41,10 +44,17 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { StadspasModule } from './views/stadspas/stadspas.module';
+import { CamundaModule } from './views/camunda/camunda.module';
 
 @NgModule({
   imports: [
     BrowserModule,
+    NotifyModule.forRoot({
+      options: { },
+      notify: {
+          progress: true
+      }
+    }),
     AppRoutingModule,
     AppAsideModule,
     AppBreadcrumbModule.forRoot(),
@@ -52,10 +62,12 @@ import { StadspasModule } from './views/stadspas/stadspas.module';
     AppHeaderModule,
     AppSidebarModule,
     PerfectScrollbarModule,
+    NgxSpinnerModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-    StadspasModule
+    StadspasModule,
+    CamundaModule
   ],
   declarations: [
     AppComponent,
@@ -63,12 +75,15 @@ import { StadspasModule } from './views/stadspas/stadspas.module';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
-  providers: [{
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
+  providers: [
+    MessageService,
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    }
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
