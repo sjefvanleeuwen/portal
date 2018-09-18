@@ -1,5 +1,10 @@
 export const navItems = [
   {
+    name: 'Processes',
+    url: '/processes',
+    icon: 'cui-cog'
+  },
+  {
     name: 'Dashboard',
     url: '/dashboard',
     icon: 'icon-speedometer'
