@@ -14,6 +14,8 @@ export class CamundaComponent implements OnInit, OnDestroy {
 
   static i: any;
 
+  public Tasks = new Array();
+
   countryForm: FormGroup;
   constructor(
     private spinner: NgxSpinnerService,
@@ -21,9 +23,7 @@ export class CamundaComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private layout: DefaultLayoutComponent
     ) {
-
       console.log('construct camunda component');
-
     }
 
   processDefinitions: ProcessDefinition[];
@@ -35,7 +35,7 @@ export class CamundaComponent implements OnInit, OnDestroy {
       '{"topicid":"topic2","notificationmessage":"startprocessmessage","handleUserResponse":true}')
       .then((processId: string) => {
         this.cdr.detectChanges();
-        this.layout.onCreate('started process', 'The notification process has been started on the Camunda BPM server.');
+        this.layout.onCreate('Nieuw proces gestart.', 'Het <b>notification</b> proces is door u opgestart.');
        });
   }
 
@@ -43,6 +43,7 @@ export class CamundaComponent implements OnInit, OnDestroy {
     this.spinner.show();
     global.signalr.hubConnection.invoke('getprocessdefinitions').then((data: ProcessDefinition[]) => {
         console.log(data);
+        this.layout.onCreate(data.length + ' procesdefinities voor u geladen', 'Selecteer een proces om te starten.');
        // this.countries = JSON.parse(data).tasks;
         this.processDefinitions = data;
         setTimeout(() => {
@@ -55,17 +56,16 @@ export class CamundaComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
   }
 
+
+
   ngOnInit() {
+    const me = this;
+    this.layout.HumanTask.subscribe((data: any) => {
+      me.Tasks.push(data);
+    });
 
     this.countryForm = this.fb.group({
       countryControl: ['Canada22']
     });
-
-    // global.signalr.hubConnection.on('connected', (clientId) => {
-    //   console.log('connected');
-
-    // });
-
-
   }
 }
