@@ -119,11 +119,7 @@ export class DefaultLayoutComponent implements OnInit {
       global.signalr.hubConnection.on('publishmessage', (topic: string, message: string, data: string, processdata: string) => {
         // response on human tasks and only display new tasks
         if (topic === 'dashboard-human-tasks') {
-          if (data === this.lastTaskData) {
-          return;
-          }
-          this.lastTaskData = data;
-          console.log('changes');
+          console.log('topic: ' + topic + ' message: ' + message + ' data: ' + data + ' processdata: ' + processdata );
           this.onCreate('new human task', 'total tasks: ' + data);
         }
       });
