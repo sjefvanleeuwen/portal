@@ -1,7 +1,8 @@
-import { Component, Input, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, Input, ChangeDetectorRef, OnInit, EventEmitter } from '@angular/core';
 import { navItems } from './../../_nav';
 import { NotifyService, NotifyPushService } from 'ngx-notify';
 import { global } from '../../globals';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,6 +11,8 @@ import { global } from '../../globals';
 })
 
 export class DefaultLayoutComponent implements OnInit {
+
+  public HumanTask = new EventEmitter<any>();
 
   lastTaskData: string;
 
@@ -112,18 +115,30 @@ export class DefaultLayoutComponent implements OnInit {
     this._nps.create(topic + '\r\n' + data, opt).subscribe();
   }
 
-
-
   ngOnInit(): void {
+
     global.signalr.hubConnection.on('connected', () => {
       global.signalr.hubConnection.on('publishmessage', (topic: string, message: string, data: string, processdata: string) => {
         // response on human tasks and only display new tasks
         if (topic === 'dashboard-human-tasks') {
-          console.log('topic: ' + topic + ' message: ' + message + ' data: ' + data + ' processdata: ' + processdata );
-          this.onCreate('new human task', 'total tasks: ' + data);
+          this.onCreate('Taken', data + ' nieuw');
         }
-      });
+        if (topic === 'human-task-data') {
+          // implement task handler here.
+          console.log('human task data');
+          this.HumanTask.emit({
+            topic: topic,
+            message: message,
+            data: data,
+            processdata: JSON.parse(processdata)
+          });
+
+        }
+        console.log('topic: ' + topic + ' message: ' + message + ' data: ' + data + ' processdata: ' + processdata );
+     });
+      // subscribe to events, so the user interface can update.
       global.signalr.hubConnection.invoke('Subscribe', 'dashboard-human-tasks');
+      global.signalr.hubConnection.invoke('Subscribe', 'human-task-data');
     });
   }
 }
