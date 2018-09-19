@@ -45,6 +45,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { StadspasModule } from './views/stadspas/stadspas.module';
 import { CamundaModule } from './views/camunda/camunda.module';
+import { IrmaModule } from './views/irma/irma.module';
 
 @NgModule({
   imports: [
@@ -67,7 +68,8 @@ import { CamundaModule } from './views/camunda/camunda.module';
     TabsModule.forRoot(),
     ChartsModule,
     StadspasModule,
-    CamundaModule
+    CamundaModule,
+    IrmaModule
   ],
   declarations: [
     AppComponent,

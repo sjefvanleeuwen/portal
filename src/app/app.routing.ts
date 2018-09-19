@@ -59,6 +59,10 @@ export const routes: Routes = [
         loadChildren: './views/camunda/camunda.module#CamundaModule'
       },
       {
+        path: 'irma',
+        loadChildren: './views/irma/irma.module#IrmaModule'
+      },
+      {
         path: 'dashboard',
         loadChildren: './views/dashboard/dashboard.module#DashboardModule'
       }

@@ -1,5 +1,10 @@
 export const navItems = [
   {
+    name: 'IRMA',
+    url: '/irma',
+    icon: 'fa-qrcode'
+  },
+  {
     name: 'Processes',
     url: '/processes',
     icon: 'cui-cog'
