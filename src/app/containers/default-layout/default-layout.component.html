@@ -18,7 +18,7 @@
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
         <div class="dropdown-header text-center"><strong>Account</strong></div>
         <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span class="badge badge-success">4</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Tasks<span class="badge badge-danger">12</span></a>
+        <a class="dropdown-item" href="#/processes"><i class="fa fa-tasks"></i> Tasks<span class="badge badge-danger">{{ HumanTasks - HumanTasksProcessed}}</span></a>
         <div class="dropdown-header text-center"><strong>Settings</strong></div>
         <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
         <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Setting</a>
@@ -122,7 +122,32 @@
           <small class="text-muted">25GB/256GB</small> -->
         </div>
       </tab>
-    </tabset>
+      <tab>
+          <ng-template tabHeading><i class="fa fa-user"></i></ng-template>
+          <div class="p-3">
+            <h6>Profile</h6>
+            <div class="aside-options">
+              <div class="clearfix mt-4">
+                  <div class="container text-center">
+                      <div class="row">
+                            <div class="profile-header-container">   
+                            <div class="profile-header-img">
+                                    <img class="img-circle" src="https://www.vbout.com/images/persona/buyer-persona-image2.png" />
+                                    </div>
+                            </div> 
+                      </div>
+                    </div>
+              </div>
+            </div>
+            <div class="aside-options">
+              <div class="clearfix mt-3">
+              </div>
+              <div>
+              </div>
+            </div>
+          </div>
+        </tab>
+      </tabset>
   </app-aside>
 </div>
 <app-footer>

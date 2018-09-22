@@ -12,6 +12,9 @@ import { Observable } from 'rxjs';
 
 export class DefaultLayoutComponent implements OnInit {
 
+  public HumanTasks = 0;
+  public HumanTasksProcessed = 0;
+  public Tasks = new Array();
   public HumanTask = new EventEmitter<any>();
 
   lastTaskData: string;
@@ -116,15 +119,15 @@ export class DefaultLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    const me = this;
     global.signalr.hubConnection.on('connected', () => {
       global.signalr.hubConnection.on('publishmessage', (topic: string, message: string, data: string, processdata: string) => {
         // response on human tasks and only display new tasks
         if (topic === 'dashboard-human-tasks') {
           this.onCreate('Taken', data + ' nieuw');
-          this.cdr.detectChanges();
         }
         if (topic === 'human-task-data') {
+          this.HumanTasks++;
           // implement task handler here.
           console.log('human task data');
           this.HumanTask.emit({
@@ -133,8 +136,8 @@ export class DefaultLayoutComponent implements OnInit {
             data: data,
             processdata: JSON.parse(processdata)
           });
-          this.cdr.detectChanges();
         }
+        this.cdr.detectChanges();
         console.log('topic: ' + topic + ' message: ' + message + ' data: ' + data + ' processdata: ' + processdata );
      });
       // subscribe to events, so the user interface can update.
