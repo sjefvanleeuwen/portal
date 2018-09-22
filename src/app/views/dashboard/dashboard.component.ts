@@ -3,7 +3,6 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy, ChangeDetectionStrateg
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { global } from '../../globals';
-import { MessageService } from '../../services/message.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -89,7 +88,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   setHumanTasks(value: string): void {
     this.HumanTasks = value;
   }
-  constructor(private messageService: MessageService) {
+  constructor() {
    // this.subscription = this.messageService.getMessage().subscribe(message => { this.message = message; console.log('message');});
 
     // global.signalr.hubConnection.on('publishmessage', (topic: string, message: string, data: string, processdata: string) => {
