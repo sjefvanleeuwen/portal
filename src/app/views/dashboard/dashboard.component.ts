@@ -1,3 +1,4 @@
+import { DefaultLayoutComponent } from './../../containers/default-layout/default-layout.component';
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
@@ -6,7 +7,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-  constructor() {
+  constructor(private layout: DefaultLayoutComponent) {
   }
 
   ngOnDestroy(): void {
