@@ -1,5 +1,5 @@
 import ProcessDefinition from './../../models/dto/camunda/ProcessDefinition';
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { global } from '../../globals';
 import { NgxSpinnerService} from 'ngx-spinner';
@@ -14,8 +14,6 @@ export class CamundaComponent implements OnInit, OnDestroy {
 
   static i: any;
 
-  public Tasks = new Array();
-
   countryForm: FormGroup;
   constructor(
     private spinner: NgxSpinnerService,
@@ -25,10 +23,16 @@ export class CamundaComponent implements OnInit, OnDestroy {
     ) {
       console.log('construct camunda component');
     }
-
   processDefinitions: ProcessDefinition[];
-  start(): void {
-    console.log('start');
+    testTaskCompletion() {
+      global.signalr.hubConnection.invoke('CompleteTask', '61fdc42f-be72-11e8-b59c-0242ac120003', '{"selectPass" : "PLASTIC"}').then(() => {
+        alert('ok');
+      });
+    }
+
+
+  start(process: any): void {
+    console.log('start' + JSON.stringify(process));
     global.signalr.hubConnection.invoke(
       'startprocessinstance',
       'notification', 'businesskey1234',
@@ -56,16 +60,18 @@ export class CamundaComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
   }
 
-
-
   ngOnInit() {
     const me = this;
     this.layout.HumanTask.subscribe((data: any) => {
-      me.Tasks.push(data);
+      me.layout.Tasks.push(data);
     });
 
     this.countryForm = this.fb.group({
-      countryControl: ['Canada22']
+      processControl: []
+    });
+
+    this.countryForm.valueChanges.subscribe((data) => {
+      console.log('changes....' + JSON.stringify(data));
     });
   }
 }
