@@ -122,6 +122,7 @@ export class DefaultLayoutComponent implements OnInit {
         // response on human tasks and only display new tasks
         if (topic === 'dashboard-human-tasks') {
           this.onCreate('Taken', data + ' nieuw');
+          this.cdr.detectChanges();
         }
         if (topic === 'human-task-data') {
           // implement task handler here.
@@ -132,7 +133,7 @@ export class DefaultLayoutComponent implements OnInit {
             data: data,
             processdata: JSON.parse(processdata)
           });
-
+          this.cdr.detectChanges();
         }
         console.log('topic: ' + topic + ' message: ' + message + ' data: ' + data + ' processdata: ' + processdata );
      });
