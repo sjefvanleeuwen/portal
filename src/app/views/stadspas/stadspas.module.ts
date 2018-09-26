@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { StadspasComponent } from './stadspas-individual.component';
+import { StadspasListComponent } from './stadspas-list.component';
 import { StadspassenComponent } from './stadspas-batch.component';
 
 // Buttons Routing
@@ -18,6 +19,7 @@ import { StadspasRoutingModule } from './stadspas-routing.module';
   ],
   declarations: [
     StadspasComponent,
+    StadspasListComponent,
     StadspassenComponent
   ]
 })

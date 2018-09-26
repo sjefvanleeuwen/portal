@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { global } from '../../globals';
 import { NgxSpinnerService} from 'ngx-spinner';
 import { DefaultLayoutComponent } from '../../containers/default-layout/default-layout.component';
+import { SignalRService } from './../../services/signalr-service';
 
 @Component({
   selector: 'app-camunda',
@@ -15,25 +16,29 @@ export class CamundaComponent implements OnInit, OnDestroy {
   static i: any;
 
   countryForm: FormGroup;
+
   constructor(
     private spinner: NgxSpinnerService,
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
-    private layout: DefaultLayoutComponent
+    private layout: DefaultLayoutComponent,
+    private signalR: SignalRService
     ) {
       console.log('construct camunda component');
-    }
-  processDefinitions: ProcessDefinition[];
-    testTaskCompletion() {
-      global.signalr.hubConnection.invoke('CompleteTask', '61fdc42f-be72-11e8-b59c-0242ac120003', '{"selectPass" : "PLASTIC"}').then(() => {
-        alert('ok');
-      });
-    }
+  }
 
+  processDefinitions: ProcessDefinition[];
+
+  testTaskCompletion() {
+    // tslint:disable-next-line:max-line-length
+    this.signalR.hubConnection.invoke('CompleteTask', 'f1f39542-c0c6-11e8-9a1c-0242ac120004', '{"selectPass" : "PLASTIC"}').then(() => {
+      alert('ok');
+    });
+  }
 
   start(process: any): void {
     console.log('start' + JSON.stringify(process));
-    global.signalr.hubConnection.invoke(
+    this.signalR.hubConnection.invoke(
       'startprocessinstance',
       'notification', 'businesskey1234',
       '{"topicid":"topic2","notificationmessage":"startprocessmessage","handleUserResponse":true}')
@@ -45,7 +50,7 @@ export class CamundaComponent implements OnInit, OnDestroy {
 
   handleclick() {
     this.spinner.show();
-    global.signalr.hubConnection.invoke('getprocessdefinitions').then((data: ProcessDefinition[]) => {
+    this.signalR.hubConnection.invoke('getprocessdefinitions').then((data: ProcessDefinition[]) => {
         console.log(data);
         this.layout.onCreate(data.length + ' procesdefinities voor u geladen', 'Selecteer een proces om te starten.');
        // this.countries = JSON.parse(data).tasks;

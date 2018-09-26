@@ -1,81 +1,144 @@
+<app-stadspas-list></app-stadspas-list>
 <div class="animated fadeIn">
     <h1>Persoonlijke stadspas aanmaken</h1>
     <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <strong>Persoon</strong>
-                </div>
-                <div class="card-body">
-                    <form action="" method="post" class="form-horizontal ng-pristine ng-valid">
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="adminNrInput">Administratienr.</label>
-                            <div class="custom-file col-md-9">
-                                <input type="number" class="form-control is-invalid" id="adminNrInput" placeholder="Adminstratienummer" value="" required/>
-                                <div class="invalid-feedback">Verplicht veld</div>
-                            </div>                    
-                        </div>                    
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="nameInput">Naam</label>
-                            <div class="custom-file col-md-9">
-                                <input type="text" class="form-control is-valid" id="nameInput" placeholder="Naam" value="Yiorgos Avraamu" required/>
-                                <div class="invalid-feedback">Verplicht veld</div>
-                            </div>                    
-                        </div>                    
-                    </form>
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-dot-circle-o"></i> Start verwerking</button>
-                    <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
-                </div>
-            </div>            
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    Verwerkingsresultaat
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-3">Administratienummer</div>
-                        <div class="col-md-9">41986914</div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Procesgegevens</strong>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3">Datum uitgifte</div>
-                        <div class="col-md-9">24-09-2018</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">Status</div>
-                        <div class="col-md-9"><div class="badge bg-success p-2">Verwerking compleet</div></div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">Status</div>
+                            <div class="col-md-9"><div class="badge p-2" [ngClass]='model.statusClass' >{{model.status}}</div></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">Datum aanvraag</div>
+                            <div class="col-md-9">{{model.requestedAt?.toLocaleString()}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">Datum keuze</div>
+                            <div class="col-md-9">{{model.userChoiceAt?.toLocaleString()}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">Datum activatie</div>
+                            <div class="col-md-9">{{model.activatedAt?.toLocaleString()}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">Kaartsoort</div>
+                            <div class="col-md-9" *ngIf="model.activatedAt">{{model.cardType}}</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div><!--/.col-->
+        </div>
+        <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <form #stadspasForm="ngForm" (ngSubmit)="submitRequestForm()" class="form-horizontal ng-pristine ng-valid">
+                    <div class="card-header">
+                        <strong>Aanvraag indienen</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="bsnInput">BurgerServiceNummer</label>
+                            <div class="custom-file col-md-9">
+                                <input type="number" class="form-control" id="bsnInput" placeholder="voer een BSN in" 
+                                    name="BSN" [(ngModel)]="model.BSN" #bsn="ngModel" required/>
+                                <div class="invalid-feedback" [hidden]="bsn.valid || bsn.pristine">Verplicht veld</div>
+                            </div>                    
+                        </div>                    
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-success" [disabled]="!stadspasForm.form.valid"><i class="fa fa-dot-circle-o"></i> Start verwerking</button>
+                        <button type="reset" class="btn btn-sm btn-danger" (click)="resetForm()" [disabled]="!stadspasForm.form.dirty"><i class="fa fa-ban"></i> Reset</button>
+                    </div>
+                </form>
+            </div>            
+        </div>
+    </div>
+    <div class="row" *ngIf='model?.askForInput===true'>
+        <div class="col-md-12">
+            <div class="card">
+                <form #stadspasForm="ngForm" (ngSubmit)="submitChoiceForm()" class="form-horizontal ng-pristine ng-valid">
+                    <div class="card-header">
+                        <strong>Kaartkeuze</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="cardtypeInput">Kaartsoort</label>
+                            <div class="custom-file col-md-9">
+                                <select class="form-control" id="cardtypeInput" name="cardType" [(ngModel)]="model.cardType" #cardtype="ngModel" required>
+                                    <option></option>
+                                    <option>plastic</option>
+                                    <option>digital</option>
+                                </select>
+                                <div class="invalid-feedback" [hidden]="cardtype.valid || cardtype.pristine">Verplicht veld</div>
+                            </div>                    
+                        </div>                    
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-success" [disabled]="!stadspasForm.form.valid"><i class="fa fa-dot-circle-o"></i> Indienen keuze</button>
+                        <button type="reset" class="btn btn-sm btn-danger" (click)="resetForm()" [disabled]="!stadspasForm.form.dirty"><i class="fa fa-ban"></i> Reset</button>
+                    </div>
+                </form>
+            </div>            
+        </div>
     </div><!--/.row-->
-    <div class="row">
+    <div class="row" *ngIf='model?.notificationDataBRP'>
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    Keuze soort stadspas
+                    <strong>Verwerkingsresultaat</strong>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-3">Administratienummer</div>
-                        <div class="col-md-9">41986914</div>
+                        <div class="col-md-3">BurgerServiceNummer</div>
+                        <div class="col-md-9">{{model.notificationDataBRP?.burgerservicenummer}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">Datum keuze</div>
-                        <div class="col-md-9">nnb.</div>
+                        <div class="col-md-3">Geslacht</div>
+                        <div class="col-md-9">{{model.notificationDataBRP?.geslachtsaanduiding}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">Keuze</div>
-                        <div class="col-md-9">nnb.</div>
+                        <div class="col-md-3">Voorletters</div>
+                        <div class="col-md-9">{{model.notificationDataBRP?.voorletterAanschrijving}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">Status</div>
-                        <div class="col-md-9"><div class="badge bg-warning p-2">Geen keuze bekend</div></div>
+                        <div class="col-md-3">Voornamen</div>
+                        <div class="col-md-9">{{model.notificationDataBRP?.voornamen}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">Achternaam</div>
+                        <div class="col-md-9">{{model.notificationDataBRP?.geslachtsnaam}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">Geboortedatum</div>
+                        <div class="col-md-9">{{model.notificationDataBRP?.geboorteDatum}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">Geboorteplaats</div>
+                        <div class="col-md-9">{{model.notificationDataBRP?.geboorteplaats}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">Geboorteland</div>
+                        <div class="col-md-9">{{model.notificationDataBRP?.geboorteland}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">Straatnaam</div>
+                        <div class="col-md-9">{{model.notificationDataBRP?.verblijfsadres?.straatnaam}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">Huisnummer</div>
+                        <div class="col-md-9">{{model.notificationDataBRP?.verblijfsadres?.huisnummer}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">Postcode</div>
+                        <div class="col-md-9">{{model.notificationDataBRP?.verblijfsadres?.postcode}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">Woonplaatsnaam</div>
+                        <div class="col-md-9">{{model.notificationDataBRP?.verblijfsadres?.woonplaatsnaam}}</div>
                     </div>
                 </div>
             </div>

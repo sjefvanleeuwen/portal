@@ -1,8 +1,9 @@
 import { Component, Input, ChangeDetectorRef, OnInit, EventEmitter } from '@angular/core';
 import { navItems } from './../../_nav';
 import { NotifyService, NotifyPushService } from 'ngx-notify';
-import { global } from '../../globals';
-import { Observable } from 'rxjs';
+// import { global } from '../../globals';
+import { SignalRService } from './../../services/signalr-service';
+// import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,9 +18,11 @@ export class DefaultLayoutComponent implements OnInit {
   public Tasks = new Array();
   public HumanTask = new EventEmitter<any>();
 
-  lastTaskData: string;
-
-  constructor(private _ns: NotifyService, private _nps: NotifyPushService, private cdr: ChangeDetectorRef) {
+  constructor(
+    private _ns: NotifyService,
+    private _nps: NotifyPushService,
+    private cdr: ChangeDetectorRef,
+    private signalR: SignalRService) {
     console.log('default layout component constructor');
 
     this.changes = new MutationObserver((mutations) => {
@@ -27,7 +30,7 @@ export class DefaultLayoutComponent implements OnInit {
     });
 
     this.changes.observe(<Element>this.element, {
-      attributes: true
+     attributes: true
     });
   }
   public navItems = navItems;
@@ -73,6 +76,7 @@ export class DefaultLayoutComponent implements OnInit {
     minWidth: 300,
     maxWidth: 300,
   };
+
   public push: any = {
     title: '',
     body: '',
@@ -119,30 +123,31 @@ export class DefaultLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const me = this;
-    global.signalr.hubConnection.on('connected', () => {
-      global.signalr.hubConnection.on('publishmessage', (topic: string, message: string, data: string, processdata: string) => {
-        // response on human tasks and only display new tasks
-        if (topic === 'dashboard-human-tasks') {
-          this.onCreate('Taken', data + ' nieuw');
-        }
-        if (topic === 'human-task-data') {
-          this.HumanTasks++;
-          // implement task handler here.
-          console.log('human task data');
-          this.HumanTask.emit({
-            topic: topic,
-            message: message,
-            data: data,
-            processdata: JSON.parse(processdata)
-          });
-        }
-        this.cdr.detectChanges();
-        console.log('topic: ' + topic + ' message: ' + message + ' data: ' + data + ' processdata: ' + processdata );
-     });
-      // subscribe to events, so the user interface can update.
-      global.signalr.hubConnection.invoke('Subscribe', 'dashboard-human-tasks');
-      global.signalr.hubConnection.invoke('Subscribe', 'human-task-data');
-    });
+    // const me = this;
+    // this.signalR.hubConnection.on('connected', () => {
+    //   this.signalR.hubConnection.on('publishmessage', this.handlePublishedMessage);
+    //   // subscribe to events, so the user interface can update.
+    //   this.signalR.hubConnection.invoke('Subscribe', 'dashboard-human-tasks');
+    //   this.signalR.hubConnection.invoke('Subscribe', 'human-task-data');
+    // });
+  }
+
+  public handlePublishedMessage = (topic: string, message: string, data: string, processdata: string) => {
+    // response on human tasks and only display new tasks
+    if (topic === 'dashboard-human-tasks') {
+      this.onCreate('Taken', data + ' nieuw');
+    } else if (topic === 'human-task-data') {
+      this.HumanTasks++;
+      // implement task handler here.
+      console.log('human task data');
+      this.HumanTask.emit({
+        topic: topic,
+        message: message,
+        data: data,
+        processdata: JSON.parse(processdata)
+      });
+    }
+    // this.cdr.detectChanges();
+    console.log('topic: ' + topic + ' message: ' + message + ' data: ' + data + ' processdata: ' + processdata );
   }
 }
