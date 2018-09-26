@@ -1,6 +1,6 @@
 <app-stadspas-list></app-stadspas-list>
 <div class="animated fadeIn">
-    <h1>Persoonlijke stadspas aanmaken</h1>
+    <h1>Persoonlijke stadspas uitgeven</h1>
     <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-3">Status</div>
-                            <div class="col-md-9"><div class="badge p-2" [ngClass]='model.statusClass' >{{model.status}}</div></div>
+                            <div class="col-md-9"><div class="badge p-2" [ngClass]='model.statusClass("bg-")' >{{model.status}}</div></div>
                         </div>
                         <div class="row">
                             <div class="col-md-3">Datum aanvraag</div>
@@ -50,8 +50,8 @@
                         </div>                    
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-sm btn-success" [disabled]="!stadspasForm.form.valid"><i class="fa fa-dot-circle-o"></i> Start verwerking</button>
-                        <button type="reset" class="btn btn-sm btn-danger" (click)="resetForm()" [disabled]="!stadspasForm.form.dirty"><i class="fa fa-ban"></i> Reset</button>
+                        <button type="submit" class="btn btn-sm btn-success" [disabled]="!stadspasForm.form.valid || !isNewBSN()"><i class="fa fa-dot-circle-o"></i> Start verwerking</button>
+                        <button type="reset" class="btn btn-sm btn-danger" (click)="resetStadspasForm()" [disabled]="!stadspasForm.form.dirty"><i class="fa fa-ban"></i> Reset</button>
                     </div>
                 </form>
             </div>            
@@ -60,7 +60,7 @@
     <div class="row" *ngIf='model?.askForInput===true'>
         <div class="col-md-12">
             <div class="card">
-                <form #stadspasForm="ngForm" (ngSubmit)="submitChoiceForm()" class="form-horizontal ng-pristine ng-valid">
+                <form #choiceForm="ngForm" (ngSubmit)="submitChoiceForm()" class="form-horizontal ng-pristine ng-valid">
                     <div class="card-header">
                         <strong>Kaartkeuze</strong>
                     </div>
@@ -70,16 +70,16 @@
                             <div class="custom-file col-md-9">
                                 <select class="form-control" id="cardtypeInput" name="cardType" [(ngModel)]="model.cardType" #cardtype="ngModel" required>
                                     <option></option>
-                                    <option>plastic</option>
-                                    <option>digital</option>
+                                    <option value="plastic">Plastic pas</option>
+                                    <option value="digital">Digitale pas</option>
                                 </select>
                                 <div class="invalid-feedback" [hidden]="cardtype.valid || cardtype.pristine">Verplicht veld</div>
                             </div>                    
                         </div>                    
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-sm btn-success" [disabled]="!stadspasForm.form.valid"><i class="fa fa-dot-circle-o"></i> Indienen keuze</button>
-                        <button type="reset" class="btn btn-sm btn-danger" (click)="resetForm()" [disabled]="!stadspasForm.form.dirty"><i class="fa fa-ban"></i> Reset</button>
+                        <button type="submit" class="btn btn-sm btn-success" [disabled]="!choiceForm.form.valid"><i class="fa fa-dot-circle-o"></i> Indienen keuze</button>
+                        <button type="reset" class="btn btn-sm btn-danger" (click)="resetChoiceForm()" [disabled]="!choiceForm.form.dirty"><i class="fa fa-ban"></i> Reset</button>
                     </div>
                 </form>
             </div>            

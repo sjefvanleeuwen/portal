@@ -38,15 +38,15 @@ export class Stadspas {
         }
     }
 
-    public get statusClass(): string {
+    public statusClass(prefix: string): string {
         if (this.activatedAt) {
-            return 'bg-success';
+            return prefix + 'success';
         } else if (this.userChoiceAt) {
-            return 'bg-secondary';
+            return  prefix + 'secondary';
         } else if (this.askForInput) {
-            return 'bg-primary';
+            return  prefix + 'primary';
         } else if (this.requestedAt) {
-            return 'bg-warning';
+            return  prefix + 'warning';
         } else {
             return '';
         }

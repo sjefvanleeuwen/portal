@@ -5,7 +5,7 @@ import { BPMProcessData } from './../../models/dto/bpm/bpm-process';
 import { BPMNotification } from './../../models/dto/bpm/bpm-notification';
 import { Subscription } from 'rxjs';
 import { Topics } from './../../models/topics';
-import { StadspasListComponent } from './stadspas-list.component';
+import { global } from './../../globals';
 
 @Component({
   templateUrl: 'stadspas-individual.component.html'
@@ -27,6 +27,10 @@ export class StadspasComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  public isNewBSN(): boolean {
+    return !!this.model && !global.stadspassen.find((pas) => pas.BSN === this.model.BSN);
+  }
+
   public submitRequestForm(): void {
     console.log(`Request submitted for BSN ${this.model.BSN}`);
 
@@ -38,6 +42,8 @@ export class StadspasComponent implements OnInit, OnDestroy {
 
         this.model.process.Id = processId;
         this.model.requestedAt = new Date();
+
+        global.stadspassen.push(this.model);
       });
   }
 
@@ -50,14 +56,19 @@ export class StadspasComponent implements OnInit, OnDestroy {
       .then(() => {
         console.log('Process continued: ');
 
-        //this.model.askForInput = false;
+        //this.model.askForInput = false; // TODO: restore code
         this.model.userChoiceAt = new Date();
       });
   }
 
-  public resetForm(): void {
+  public resetStadspasForm(): void {
     console.log('Form reset');
     this.model = new Stadspas();
+  }
+
+  public resetChoiceForm(): void {
+    console.log('Form reset');
+    this.model.cardType = undefined;
   }
 
   private handleMessage(msg: BPMMessage): void {
