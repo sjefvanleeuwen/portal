@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -68,7 +69,8 @@ import { IrmaModule } from './views/irma/irma.module';
     ChartsModule,
     StadspasModule,
     CamundaModule,
-    IrmaModule
+    IrmaModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
