@@ -31,7 +31,7 @@
         <app-stadspas-letter [model]="model"></app-stadspas-letter>
     </div><!--/.row-->
     <div class="row justify-content-md-center" *ngIf="model && model.activatedAt">
-        <app-irma></app-irma>
+        <app-irma [forActivation]="true"></app-irma>
     </div><!--/.row-->
 </div>
 

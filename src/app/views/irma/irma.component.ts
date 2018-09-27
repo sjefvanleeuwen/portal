@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, Input } from '@angular/core';
 import * as jwtDecode from 'jwt-decode';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { mapTo, delay } from 'rxjs/operators';
@@ -12,6 +12,9 @@ import { AuthService } from '../../services/auth-service';
 })
 
 export class IrmaComponent implements OnInit {
+
+  @Input()
+  public forActivation: boolean;
 
   url = 'https://privacybydesign.foundation/tomcat/irma_api_server/api/v2/issue/';
   JWTTest = '';
@@ -163,5 +166,10 @@ export class IrmaComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.forActivation) {
+      this.issue();
+    } else {
+      this.disclose();
+    }
   }
 }
