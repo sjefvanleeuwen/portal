@@ -16,19 +16,6 @@ export class BPMMessage {
 export class BPMService {
 
     constructor(private signalR: SignalRService) {
-        console.log('BPMService constructed');
-        this.signalR.hubConnection.on('Connected', () => {
-            this.signalR.hubConnection.on('publishmessage', this.handlePublishedMessage);
-            // subscribe to events, so the user interface can update.
-            console.log('client subscribing: ' + Topics[0]);
-            console.log('client subscribing: ' + Topics[1]);
-            console.log('client subscribing: ' + Topics[2]);
-            this.signalR.hubConnection.invoke('Subscribe', Topics[0]).then(() => {
-                this.signalR.hubConnection.invoke('Subscribe', Topics[1]);
-            });
-          });
-
-          this.signalR.connect();
     }
 
     private subject = new Subject<BPMMessage>();
@@ -46,11 +33,39 @@ export class BPMService {
     }
 
     public subscribeForBsn(bsn: number) {
-        this.signalR.hubConnection.invoke('Subscribe', `city-pass-${bsn}`);
+        console.log('BPMService constructed');
+        this.signalR.hubConnection.on('Connected', () => {
+            this.signalR.hubConnection.on('publishmessage', this.handlePublishedMessage);
+            // subscribe to events, so the user interface can update.
+            console.log('client subscribing: ' + Topics[0]);
+            console.log('client subscribing: ' + Topics[1]);
+            console.log('client subscribing: ' + Topics[2]);
+            this.signalR.hubConnection.invoke('Subscribe', Topics[0]).then(() => {
+                this.signalR.hubConnection.invoke('Subscribe', Topics[1]).then(() => {
+                    this.signalR.hubConnection.invoke('Subscribe', `city-pass-${bsn}`);
+                });
+            });
+          });
+
+          this.signalR.connect();
     }
 
     public subscribeForMunicipality() {
-        this.signalR.hubConnection.invoke('Subscribe', Topics[2]);
+        console.log('BPMService constructed');
+        this.signalR.hubConnection.on('Connected', () => {
+            this.signalR.hubConnection.on('publishmessage', this.handlePublishedMessage);
+            // subscribe to events, so the user interface can update.
+            console.log('client subscribing: ' + Topics[0]);
+            console.log('client subscribing: ' + Topics[1]);
+            console.log('client subscribing: ' + Topics[2]);
+            this.signalR.hubConnection.invoke('Subscribe', Topics[0]).then(() => {
+                this.signalR.hubConnection.invoke('Subscribe', Topics[1]).then(() => {
+                    this.signalR.hubConnection.invoke('Subscribe', Topics[2]);
+                });
+            });
+          });
+
+          this.signalR.connect();
     }
 
     public startProcess(processDefinitionName: string, referenceNo: string, payload: any): Promise<any> {
