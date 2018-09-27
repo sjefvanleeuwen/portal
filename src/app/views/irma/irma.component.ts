@@ -86,7 +86,7 @@ export class IrmaComponent implements OnInit {
     const p2 = btoa(JSON.stringify(payload)).replace(/=/g, '');
 
     this.httpClient.post('http://0.0.0.0:8088/api/v2/verification',
-      p1 + '.' + p2 + '.', {headers: this.headers}).subscribe((result: Object) => {
+      p1 + '.' + p2 + '.', {headers: this.headers}).subscribe((result: any) => {
           const clone = JSON.parse(JSON.stringify(result));
           result.u = this.irma_api_server_address  + '/api/v2/verification/' + result.u;
           this.JWTTest = JSON.stringify(result);
@@ -159,7 +159,7 @@ export class IrmaComponent implements OnInit {
     this.p2 = btoa(JSON.stringify(payload));
 
     this.httpClient.post('http://0.0.0.0:8088/api/v2/issue',
-      this.p1 + '.' + this.p2 + '.', {headers: this.headers}).subscribe((result: Object) => {
+      this.p1 + '.' + this.p2 + '.', {headers: this.headers}).subscribe((result: any) => {
           result.u = this.irma_api_server_address  + '/api/v2/issue/' + result.u;
           this.JWTTest = JSON.stringify(result);
     });
