@@ -1,16 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Stadspas } from './../../models/dto/stadspas/stadspas';
-import { BPMService, BPMMessage } from './../../services/bpm-service';
-import { BPMProcessData } from './../../models/dto/bpm/bpm-process';
-import { BPMNotification } from './../../models/dto/bpm/bpm-notification';
+import { Stadspas } from '../../models/dto/stadspas/stadspas';
+import { BPMService, BPMMessage } from '../../services/bpm-service';
+import { BPMProcessData } from '../../models/dto/bpm/bpm-process';
+import { BPMNotification } from '../../models/dto/bpm/bpm-notification';
 import { Subscription } from 'rxjs';
-import { Topics } from './../../models/topics';
-import { global } from './../../globals';
+import { Topics } from '../../models/topics';
+import { global } from '../../globals';
 
 @Component({
-  templateUrl: 'stadspas-individual.component.html'
+  selector: 'app-stadspas-prof',
+  templateUrl: 'stadspas-professional.component.html'
 })
-export class StadspasComponent implements OnInit, OnDestroy {
+export class StadspasProfessionalComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   public model: Stadspas = new Stadspas();
 
@@ -47,41 +48,22 @@ export class StadspasComponent implements OnInit, OnDestroy {
       });
   }
 
-  public submitChoiceForm() {
-    console.log(`Choice submitted for BSN ${this.model.BSN} choice is ${this.model.cardType}`);
-
-    const payload: any = { selectPass : this.model.cardType };
-    this.bpm
-      .completeProcess(this.model.process.Id, JSON.stringify(payload))
-      .then(() => {
-        console.log('Process continued: ');
-
-        //this.model.askForInput = false; // TODO: restore code
-        this.model.userChoiceAt = new Date();
-      });
-  }
-
-  public resetStadspasForm(): void {
-    console.log('Form reset');
+  public resetRequestForm(): void {
     this.model = new Stadspas();
   }
 
-  public resetChoiceForm(): void {
-    console.log('Form reset');
-    this.model.cardType = undefined;
-  }
-
   private handleMessage(msg: BPMMessage): void {
+    console.log(msg.topic, JSON.stringify(msg));
+
     switch (msg.topic) {
-      case Topics[0] /*'dashboard-human-tasks'*/ : {
-        console.log(Topics[0], JSON.stringify(msg));
-
-        break;
-      }
+      // case Topics[0] /*'dashboard-human-tasks'*/ : {
+      //   break;
+      // }
       case Topics[1] /*'human-task-data'*/: {
-        console.log(Topics[1], JSON.stringify(msg));
-
         this.model.askForInput = true;
+
+        // TODO: TEST ONLY
+        global.bsnBurger = this.model.BSN;
 
         break;
       }

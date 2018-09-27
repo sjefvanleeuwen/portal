@@ -21,8 +21,7 @@ export class BPMService {
             // subscribe to events, so the user interface can update.
             this.signalR.hubConnection.invoke('Subscribe', Topics[0]);
             this.signalR.hubConnection.invoke('Subscribe', Topics[1]);
-            this.signalR.hubConnection.invoke('Subscribe', Topics[2]); // brp-push-data, passSelected
-            //this.signalR.hubConnection.invoke('Subscribe', 'city-pass-${bsn}'); // brp-push-data, passselected
+            this.signalR.hubConnection.invoke('Subscribe', Topics[2]);
           });
     }
 
@@ -38,6 +37,10 @@ export class BPMService {
 
     public getMessage(): Observable<BPMMessage> {
         return this.subject.asObservable();
+    }
+
+    public subscribeForCityPass(bsn: number) {
+        this.signalR.hubConnection.invoke('Subscribe', `city-pass-${bsn}`);
     }
 
     public startProcess(processDefinitionName: string, referenceNo: string, payload: any): Promise<any> {

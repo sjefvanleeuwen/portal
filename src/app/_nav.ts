@@ -20,8 +20,13 @@ export const navItems = [
     icon: 'icon-credit-card',
     children: [
       {
-        name: 'Persoonlijk',
-        url: '/stadspas/stadspas',
+        name: 'Professional',
+        url: '/stadspas/stadspas-prof',
+        icon: 'icon-user'
+      },
+      {
+        name: 'Inwoner',
+        url: '/stadspas/stadspas-burger',
         icon: 'icon-user'
       },
       {

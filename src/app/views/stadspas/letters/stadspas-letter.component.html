@@ -1,0 +1,93 @@
+<div class="letter-container">
+  <div class="stadspas-letter col-md-10 offset-md-1" *ngIf="model">
+      <header> 
+        <div class="row">
+          <div class="col-6">
+              <address class="return-address">
+              Retouradres: Postbus 511, 2003 PB Haarlem<br/>
+              {{formattedFullName()}}<br/>
+              {{formattedAddress1()}}<br/>
+              {{formattedAddress2()}}<br/>
+            </address>
+    
+            <span><strong>Datum:</strong><br/>{{formatDate(model.activatedAt)}}</span><br/><br/>
+            <span><strong>Onderwerp:</strong><br/>Toekenning stadspas 2019</span>
+          </div>
+          <div class="col-6">
+              <img class="header-logo" src="http://www.warmtenetwerk.nl/assets/Uploads/gem.haarlem.jpg"/>
+          </div>
+        </div>
+    </header>
+
+    <div class="content">
+      <p>
+        Beste {{formattedSalutation()}},
+      </p>
+      
+      <p>
+        Op {{formatDateNoYear(model.activatedAt)}} is het recht op een stadspas 2019 vastgesteld.
+      </p>
+      
+      <p>
+        <strong>Wat is het besluit?</strong><br/>
+        Er is besloten dat de volgende personen recht hebben op een stadspas voor 2019:
+      </p>
+      
+      <p>
+        <span data-bind="text: voornamen"></span><span data-bind="text: voorvoegselGeslachtnaam"></span><span data-bind="text: geslachtnaam"></span><span data-bind="text: geboortedatum"></span>
+        <span data-bind="text: partner voornamen"></span><span data-bind="text: partner voorvoegselGeslachtnaam"><span data-bind="text: partner geslachtnaam"></span></span><span data-bind="text: partner geboortedatum"></span>
+      </p>
+      
+      <p>
+        U komt in aanmerking voor de stadspas omdat uw inkomen onder de inkomensgrens van 115% van de bijstandsnorm is vastgesteld.
+        Het recht op de stadspas wordt jaarlijks verlengd. Heeft u al een stadspas? Dan wordt deze voor 2019 automatisch verlengd.
+        U bent verplicht om wijzigingen in uw gezins-, vermogens-, of inkomenssituatie door te geven.
+        Als blijkt dat u onvolledige of onjuiste gegevens doorgeeft, dan kunnen wij uw stadspas en die van uw gezinsleden blokkeren. U kunt de pas dan niet meer gebruiken.
+      </p>
+      
+      <p>
+        Heeft u gekozen voor de digitale pas volg dan de instructies in de stadspas app.<br/>
+        Indien u heeft gekozen voor de plastic versie dan krijgt u deze binnen drie werkdagen thuis gestuurd.
+      </p>
+      
+      <p>
+        <strong>Heeft u nog vragen?</strong><br/>
+        Voor meer informatie over de stadspas neemt u contact op met de afdeling Sociale Zaken en Werkgelegenheid. U kunt hiervoor bellen met het nummer 14 023.<br/>
+        U kunt ook mailen naar <a href="mailto:klantenservice@haarlem.nl">klantenservice@haarlem.nl</a>. Meer informatie kunt u vinden op <a href="http://www.haarlem.nl">www.haarlem.nl</a>.
+      </p>
+      
+      <p>
+        Met vriendelijke groet,<br/><br/>
+        Namens burgemeester en wethouders,
+      </p>
+      
+      <p>
+        <i>Managernaam</i><br/>
+        Manager afdeling Stadspassen
+      </p>
+      
+      <p>
+        Dit document is automatisch aangemaakt. Daarom ziet u geen handtekening.
+      </p>
+      
+      <p>
+        Waar staat dit in de wet?<br/>
+        <a href="#">Beleidsregels Stadspas Haarlem</a>
+      </p>
+      
+      <p>
+        Bent u het niet eens met het besluit?<br/>
+        Neemt u dan eerst contact op met de afdeling Sociale Zaken en Werkgelegenheid.
+      </p>
+      
+      <p>
+        Blijft u het oneens? U kunt dan bezwaar maken tot uiterlijk 6 weken na de datum van dit besluit. Dat kan op 2 maieren:<br/>
+        1. Digitaal via onze website <a href="http://www.haarlem.nl/bezwaar">www.haarlem.nl/bezwaar</a><br/>
+        2. met een brief naar het volgende adres:<br/>
+        Gemeente Haarlem afdeling Sociale Zaken en Werkgelegenheid<br/>
+        Postbus 511 <br/>
+        2003 PB Haarlem
+      </p>
+    </div>
+  </div>
+</div>

@@ -2,37 +2,37 @@
 <div class="animated fadeIn">
     <h1>Persoonlijke stadspas uitgeven</h1>
     <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <strong>Procesgegevens</strong>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Procesgegevens</strong>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">Status</div>
+                        <div class="col-md-9"><div class="badge p-2" [ngClass]='model.statusClass("bg-")' >{{model.status}}</div></div>
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-3">Status</div>
-                            <div class="col-md-9"><div class="badge p-2" [ngClass]='model.statusClass("bg-")' >{{model.status}}</div></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">Datum aanvraag</div>
-                            <div class="col-md-9">{{model.requestedAt?.toLocaleString()}}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">Datum keuze</div>
-                            <div class="col-md-9">{{model.userChoiceAt?.toLocaleString()}}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">Datum activatie</div>
-                            <div class="col-md-9">{{model.activatedAt?.toLocaleString()}}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">Kaartsoort</div>
-                            <div class="col-md-9" *ngIf="model.activatedAt">{{model.cardType}}</div>
-                        </div>
+                    <div class="row">
+                        <div class="col-md-3">Datum aanvraag</div>
+                        <div class="col-md-9">{{model.requestedAt?.toLocaleString()}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">Datum keuze</div>
+                        <div class="col-md-9">{{model.userChoiceAt?.toLocaleString()}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">Datum activatie</div>
+                        <div class="col-md-9">{{model.activatedAt?.toLocaleString()}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">Kaartsoort</div>
+                        <div class="col-md-9" *ngIf="model.activatedAt">{{model.cardType}}</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
+    </div>
+    <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <form #stadspasForm="ngForm" (ngSubmit)="submitRequestForm()" class="form-horizontal ng-pristine ng-valid">
@@ -51,40 +51,12 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-sm btn-success" [disabled]="!stadspasForm.form.valid || !isNewBSN()"><i class="fa fa-dot-circle-o"></i> Start verwerking</button>
-                        <button type="reset" class="btn btn-sm btn-danger" (click)="resetStadspasForm()" [disabled]="!stadspasForm.form.dirty"><i class="fa fa-ban"></i> Reset</button>
+                        <button type="reset" class="btn btn-sm btn-danger" (click)="resetRequestForm()" [disabled]="!stadspasForm.form.dirty"><i class="fa fa-ban"></i> Reset</button>
                     </div>
                 </form>
             </div>            
         </div>
     </div>
-    <div class="row" *ngIf='model?.askForInput===true'>
-        <div class="col-md-12">
-            <div class="card">
-                <form #choiceForm="ngForm" (ngSubmit)="submitChoiceForm()" class="form-horizontal ng-pristine ng-valid">
-                    <div class="card-header">
-                        <strong>Kaartkeuze</strong>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="cardtypeInput">Kaartsoort</label>
-                            <div class="custom-file col-md-9">
-                                <select class="form-control" id="cardtypeInput" name="cardType" [(ngModel)]="model.cardType" #cardtype="ngModel" required>
-                                    <option></option>
-                                    <option value="plastic">Plastic pas</option>
-                                    <option value="digital">Digitale pas</option>
-                                </select>
-                                <div class="invalid-feedback" [hidden]="cardtype.valid || cardtype.pristine">Verplicht veld</div>
-                            </div>                    
-                        </div>                    
-                    </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-sm btn-success" [disabled]="!choiceForm.form.valid"><i class="fa fa-dot-circle-o"></i> Indienen keuze</button>
-                        <button type="reset" class="btn btn-sm btn-danger" (click)="resetChoiceForm()" [disabled]="!choiceForm.form.dirty"><i class="fa fa-ban"></i> Reset</button>
-                    </div>
-                </form>
-            </div>            
-        </div>
-    </div><!--/.row-->
     <div class="row" *ngIf='model?.notificationDataBRP'>
         <div class="col-md-12">
             <div class="card">

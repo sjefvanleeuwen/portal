@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
-import { StadspasComponent } from './stadspas-individual.component';
+import { StadspasBurgerComponent } from './stadspas-burger.component';
+import { StadspasProfessionalComponent } from './stadspas-professional.component';
 import { StadspassenComponent } from './stadspas-batch.component';
 
 const routes: Routes = [
@@ -14,10 +15,17 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'stadspas',
-        component: StadspasComponent,
+        path: 'stadspas-prof',
+        component: StadspasProfessionalComponent,
         data: {
-          title: 'Persoonlijk'
+          title: 'Professional'
+        }
+      },
+      {
+        path: 'stadspas-burger',
+        component: StadspasBurgerComponent,
+        data: {
+          title: 'Burger'
         }
       },
       {

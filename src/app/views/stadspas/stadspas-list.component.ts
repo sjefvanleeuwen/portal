@@ -9,10 +9,6 @@ import { Stadspas } from './../../models/dto/stadspas/stadspas';
 export class StadspasListComponent {
     public model: Array<Stadspas>;
 
-    public test(): string {
-        return "TEST";
-    }
-
     constructor() {
         this.model = global.stadspassen;
     }

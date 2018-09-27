@@ -1,0 +1,34 @@
+<div class="animated fadeIn">
+    <div class="row justify-content-md-center" *ngIf='model && model.askForInput'>
+        <div class="col-md-10">
+            <div class="card">
+                <form #choiceForm="ngForm" (ngSubmit)="submitChoiceForm()" class="form-horizontal ng-pristine ng-valid">
+                    <div class="card-header">
+                        <h1>Keuze soort stadspas</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="cardtypeInput">Kaartsoort</label>
+                            <div class="custom-file col-md-6">
+                                <select class="form-control" id="cardtypeInput" name="cardType" [(ngModel)]="model.cardType" #cardtype="ngModel" required>
+                                    <option></option>
+                                    <option value="plastic">Plastic pas</option>
+                                    <option value="digital">Digitale pas</option>
+                                </select>
+                                <div class="invalid-feedback" [hidden]="cardtype.valid || cardtype.pristine">Verplicht veld</div>
+                            </div>                    
+                        </div>                    
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-success" [disabled]="!choiceForm.form.valid"><i class="fa fa-dot-circle-o"></i> Indienen keuze</button>
+                        <button type="reset" class="btn btn-sm btn-danger" (click)="resetChoiceForm()" [disabled]="!choiceForm.form.dirty"><i class="fa fa-ban"></i> Reset</button>
+                    </div>
+                </form>
+            </div>            
+        </div>
+    </div><!--/.row-->
+    <div class="row justify-content-md-center">
+        <app-stadspas-letter [model]="model"></app-stadspas-letter>
+    </div><!--/.row-->
+</div>
+

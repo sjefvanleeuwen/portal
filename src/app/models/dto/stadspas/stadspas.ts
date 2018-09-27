@@ -20,8 +20,8 @@ export class Stadspas {
     // process
     public process: BPMProcess;
     public processData: BPMProcessData;
-    public askForInput: boolean;
     public activatedAt: Date;
+    public askForInput: boolean;
 
     // status
     public get status(): string {
