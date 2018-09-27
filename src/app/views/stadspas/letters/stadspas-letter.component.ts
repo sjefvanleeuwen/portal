@@ -39,6 +39,26 @@ export class StadspasLetterComponent {
         return result.replace('  ', ' ');
     }
 
+    formattedName(): string {
+        if (!this.model || !this.model.notificationDataBRP) {
+            return '';
+        }
+
+        // tslint:disable-next-line:max-line-length
+        const result = `${this.model.notificationDataBRP.voorletterAanschrijving} ${this.model.notificationDataBRP.voorvoegselGeslachtnaam} ${this.model.notificationDataBRP.geslachtsnaam}`;
+        return result.replace('  ', ' ');
+    }
+
+    formattedPartnerName(): string {
+        if (!this.model || !this.model.notificationDataBRP || !this.model.notificationDataBRP.partner) {
+            return '';
+        }
+
+        // tslint:disable-next-line:max-line-length
+        const result = `${this.model.notificationDataBRP.partner.voorletterAanschrijving} ${this.model.notificationDataBRP.partner.voorvoegselGeslachtnaam} ${this.model.notificationDataBRP.partner.geslachtsnaam}`;
+        return result.replace('  ', ' ');
+    }
+
     formattedSalutation(): string {
         if (!this.model || !this.model.notificationDataBRP) {
             return '';

@@ -43,11 +43,19 @@ export class StadspasBurgerComponent implements OnInit, OnDestroy {
       this.model.notificationDataBRP.voornamen = 'Piet';
       this.model.notificationDataBRP.voorletterAanschrijving = 'P.';
       this.model.notificationDataBRP.geslachtsnaam = 'Wit';
+      this.model.notificationDataBRP.geboorteDatum = new Date(1967, 4, 15);
       this.model.notificationDataBRP.verblijfadres = {};
       this.model.notificationDataBRP.verblijfadres.straatnaam = 'Straatweg';
       this.model.notificationDataBRP.verblijfadres.huisnummer = '14';
       this.model.notificationDataBRP.verblijfadres.postcode = '2222 DG';
       this.model.notificationDataBRP.verblijfadres.woonplaatsnaam = 'Haarlem';
+      this.model.notificationDataBRP.partner = {};
+      this.model.notificationDataBRP.partner.geslachtsaanduiding = 'V';
+      this.model.notificationDataBRP.partner.voorvoegselGeslachtnaam = 'de';
+      this.model.notificationDataBRP.partner.voornamen = 'Femke';
+      this.model.notificationDataBRP.partner.voorletterAanschrijving = 'F.';
+      this.model.notificationDataBRP.partner.geslachtsnaam = 'Vries';
+      this.model.notificationDataBRP.partner.geboorteDatum = new Date(1963, 7, 25);
     }
   }
 

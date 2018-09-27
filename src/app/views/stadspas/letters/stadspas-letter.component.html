@@ -1,5 +1,5 @@
-<div class="letter-container">
-  <div class="stadspas-letter col-md-10 offset-md-1" *ngIf="model">
+<div class="letter-container animated fadeIn">
+  <div class="stadspas-letter col-md-10 offset-md-1">
       <header> 
         <div class="row">
           <div class="col-6">
@@ -33,10 +33,10 @@
         Er is besloten dat de volgende personen recht hebben op een stadspas voor 2019:
       </p>
       
-      <p>
-        <span data-bind="text: voornamen"></span><span data-bind="text: voorvoegselGeslachtnaam"></span><span data-bind="text: geslachtnaam"></span><span data-bind="text: geboortedatum"></span>
-        <span data-bind="text: partner voornamen"></span><span data-bind="text: partner voorvoegselGeslachtnaam"><span data-bind="text: partner geslachtnaam"></span></span><span data-bind="text: partner geboortedatum"></span>
-      </p>
+      <ul>
+        <li>{{formattedName()}}, geboren op {{formatDate(model.notificationDataBRP?.geboorteDatum)}}</li>
+        <li *ngIf="model.notificationDataBRP?.partner">{{formattedPartnerName()}}, geboren op {{formatDate(model.notificationDataBRP?.partner?.geboorteDatum)}}</li>
+      </ul>
       
       <p>
         U komt in aanmerking voor de stadspas omdat uw inkomen onder de inkomensgrens van 115% van de bijstandsnorm is vastgesteld.
