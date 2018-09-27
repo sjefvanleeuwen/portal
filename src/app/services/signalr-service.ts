@@ -11,6 +11,9 @@ export class SignalRService {
         this.hubConnection = new HubConnectionBuilder()
             .withUrl('http://localhost:5051/eventhub')
             .build();
+    }
+
+    public connect(): void {
         this.hubConnection
             .start()
             .catch(err => document.write('Error connecting to signalr eventhub'))
