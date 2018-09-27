@@ -1,7 +1,5 @@
 import { Component, OnInit, Renderer2, Input } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { mapTo, delay } from 'rxjs/operators';
-import jwt_decode = require('jwt-decode');
 import { AuthService } from '../../services/auth-service';
 
 @Component({
@@ -20,7 +18,7 @@ export class IrmaComponent implements OnInit {
   header: any;
   payload: any;
   signature: any;
-  timer: NodeJS.Timer = null;
+  timer: any = null;
 
   p1: string;
   p2: string;
