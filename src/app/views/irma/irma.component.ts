@@ -163,10 +163,14 @@ export class IrmaComponent implements OnInit {
   }
 
   ngOnInit() {
+    clearTimeout(this.timer);
+    this.timer = null;
     if (this.forActivation) {
-      //this.issue();
+      console.log('foractivation:issue');
+      this.issue();
     } else {
-      //this.disclose();
+      console.log('foractivation:disclose');
+      this.disclose();
     }
   }
 }

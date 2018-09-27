@@ -16,7 +16,8 @@ export class BPMMessage {
 export class BPMService {
 
     constructor(private signalR: SignalRService) {
-        this.signalR.hubConnection.on('connected', () => {
+        console.log('BPMService constructed');
+        this.signalR.hubConnection.on('Connected', () => {
             this.signalR.hubConnection.on('publishmessage', this.handlePublishedMessage);
             // subscribe to events, so the user interface can update.
             console.log('client subscribing: ' + Topics[0]);
