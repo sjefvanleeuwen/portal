@@ -82,7 +82,8 @@ export class StadspasBurgerComponent implements OnInit, OnDestroy {
   }
 
   private myBrpTopic(): string {
-    return `city-pass-${this.bsn}`;
+//    return `city-pass-${this.bsn}`;
+    return 'city-pass';
   }
 
   private handleMessage(msg: BPMMessage): void {
@@ -96,7 +97,7 @@ export class StadspasBurgerComponent implements OnInit, OnDestroy {
         this.model.askForInput = true;
         break;
       }
-      case this.myBrpTopic(): {
+      case Topics[2]: {
         console.log(JSON.stringify(msg));
 
         this.model.activatedAt = new Date();
