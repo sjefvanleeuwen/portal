@@ -1,5 +1,4 @@
 import { Component, OnInit, Renderer2, Input } from '@angular/core';
-import * as jwtDecode from 'jwt-decode';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { mapTo, delay } from 'rxjs/operators';
 import jwt_decode = require('jwt-decode');
