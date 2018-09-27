@@ -1,6 +1,8 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import * as jwtDecode from 'jwt-decode';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { mapTo, delay } from 'rxjs/operators';
+import jwt_decode = require('jwt-decode');
 
 @Component({
   selector: 'app-irma',
@@ -15,6 +17,7 @@ export class IrmaComponent implements OnInit {
   header: any;
   payload: any;
   signature: any;
+  timer: NodeJS.Timer = null;
 
   p1: string;
   p2: string;
@@ -28,7 +31,24 @@ export class IrmaComponent implements OnInit {
     'Accept' : 'application/json, text/plain'
   });
 
+  headers2 = new HttpHeaders({
+    'Content-Type': 'text/plain',
+    'Accept' : 'text/plain'
+  });
+
   constructor(private renderer: Renderer2, private httpClient: HttpClient)  { }
+
+  doLogin(bsn: string) {
+    alert('implement login for bsn:' + bsn)
+  }
+
+  getProof(token: string) {
+    const s: string = 'http://10.109.0.178:8088/api/v2/verification/' + token + '/getproof';
+    this.httpClient.get(s, {headers: this.headers2, responseType: 'text'}).subscribe((result: string) => {
+      const jwt = JSON.parse(atob(result.split('.')[1]));
+      this.doLogin(jwt.attributes['irma-demo.nijmegen.bsn.bsn']);
+    });
+  }
 
   disclose() {
     let header = {
@@ -60,13 +80,14 @@ export class IrmaComponent implements OnInit {
 
     this.httpClient.post('http://0.0.0.0:8088/api/v2/verification',
       p1 + '.' + p2 + '.', {headers: this.headers}).subscribe((result: Object) => {
-        //  const clone = Object.create(result);
+          const clone = JSON.parse(JSON.stringify(result));
           result.u = this.irma_api_server_address  + '/api/v2/verification/' + result.u;
           this.JWTTest = JSON.stringify(result);
-          // this.httpClient.get('http://10.109.0.178:8088/api/v2/verification/' + clone.u + '/status?' + Math.random())
-          //   .subscribe((innerResult: Object) => {
-          //   alert(innerResult) ;
-          // });
+          if (this.timer != null) {
+            clearTimeout(this.timer);
+            this.timer = null;
+          }
+          this.pollForScan(clone);
     });
   }
 
@@ -80,7 +101,24 @@ export class IrmaComponent implements OnInit {
         }
     }
     return cloneObj;
-}
+  }
+
+  pollForScan(clone: any) {
+    this.httpClient.get('http://10.109.0.178:8088/api/v2/verification/' + clone.u + '/status?' + Math.random())
+    .subscribe((innerResult: Object) => {
+      if (innerResult === 'DONE') {
+        // get results from IRMA API server
+        this.getProof(clone.u);
+        this.timer = null;
+        return;
+      }
+      console.log(innerResult);
+      this.timer = setTimeout(() => {
+        this.pollForScan(clone);
+      }, 1000);
+  });
+
+  }
 
   issue() {
     let header = {
@@ -118,8 +156,7 @@ export class IrmaComponent implements OnInit {
           result.u = this.irma_api_server_address  + '/api/v2/issue/' + result.u;
           this.JWTTest = JSON.stringify(result);
     });
-
-
+  }
 
   ngOnInit() {
   }
