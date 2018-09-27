@@ -1,8 +1,5 @@
 import { Component, OnInit, Renderer2, Input } from '@angular/core';
-// import * as jwtDecode from 'jwt-decode';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-// import { mapTo, delay } from 'rxjs/operators';
-// import jwt_decode = require('jwt-decode');
 import { AuthService } from '../../services/auth-service';
 
 @Component({
@@ -21,7 +18,7 @@ export class IrmaComponent implements OnInit {
   header: any;
   payload: any;
   signature: any;
-  timer: any;
+  timer: any = null;
 
   p1: string;
   p2: string;
@@ -167,9 +164,9 @@ export class IrmaComponent implements OnInit {
 
   ngOnInit() {
     if (this.forActivation) {
-      this.issue();
+      //this.issue();
     } else {
-      this.disclose();
+      //this.disclose();
     }
   }
 }
