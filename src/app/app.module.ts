@@ -46,6 +46,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { StadspasModule } from './views/stadspas/stadspas.module';
 import { CamundaModule } from './views/camunda/camunda.module';
 import { IrmaModule } from './views/irma/irma.module';
+import { IrmaComponent } from './views/irma/irma.component';
 
 @NgModule({
   imports: [
@@ -78,7 +79,7 @@ import { IrmaModule } from './views/irma/irma.module';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent,
+    RegisterComponent
   ],
   providers: [
     {

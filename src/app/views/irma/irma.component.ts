@@ -3,6 +3,7 @@ import * as jwtDecode from 'jwt-decode';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { mapTo, delay } from 'rxjs/operators';
 import jwt_decode = require('jwt-decode');
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-irma',
@@ -36,10 +37,13 @@ export class IrmaComponent implements OnInit {
     'Accept' : 'text/plain'
   });
 
-  constructor(private renderer: Renderer2, private httpClient: HttpClient)  { }
+  constructor(
+    private renderer: Renderer2,
+    private httpClient: HttpClient,
+    private authService: AuthService)  { }
 
   doLogin(bsn: string) {
-    alert('implement login for bsn:' + bsn)
+    this.authService.loginInwoner(Number(bsn));
   }
 
   getProof(token: string) {

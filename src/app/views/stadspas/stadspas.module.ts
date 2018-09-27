@@ -10,6 +10,7 @@ import { StadspasLetterComponent } from './letters/stadspas-letter.component';
 
 // Buttons Routing
 import { StadspasRoutingModule } from './stadspas-routing.module';
+import { IrmaModule } from '../irma/irma.module';
 
 // Angular
 
@@ -17,7 +18,8 @@ import { StadspasRoutingModule } from './stadspas-routing.module';
   imports: [
     CommonModule,
     FormsModule,
-    StadspasRoutingModule
+    StadspasRoutingModule,
+    IrmaModule
   ],
   declarations: [
     StadspasBurgerComponent,
