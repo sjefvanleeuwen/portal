@@ -24,9 +24,7 @@ export class BPMService {
             console.log('client subscribing: ' + Topics[1]);
             console.log('client subscribing: ' + Topics[2]);
             this.signalR.hubConnection.invoke('Subscribe', Topics[0]).then(() => {
-                this.signalR.hubConnection.invoke('Subscribe', Topics[1]).then(() => {
-                    this.signalR.hubConnection.invoke('Subscribe', Topics[2]);
-                });
+                this.signalR.hubConnection.invoke('Subscribe', Topics[1]);
             });
           });
 
@@ -47,8 +45,12 @@ export class BPMService {
         return this.subject.asObservable();
     }
 
-    public subscribeForCityPass(bsn: number) {
+    public subscribeForBsn(bsn: number) {
         this.signalR.hubConnection.invoke('Subscribe', `city-pass-${bsn}`);
+    }
+
+    public subscribeForMunicipality() {
+        this.signalR.hubConnection.invoke('Subscribe', Topics[2]);
     }
 
     public startProcess(processDefinitionName: string, referenceNo: string, payload: any): Promise<any> {

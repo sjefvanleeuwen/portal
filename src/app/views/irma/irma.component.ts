@@ -45,6 +45,9 @@ export class IrmaComponent implements OnInit, OnDestroy {
   doLogin(bsn: string) {
     this.authService.loginInwoner(Number(bsn));
   }
+  doLoginTest(){
+    this.doLogin('123456');
+  }
 
   getProof(token: string) {
     const s: string = 'http://10.109.0.178:8088/api/v2/verification/' + token + '/getproof';

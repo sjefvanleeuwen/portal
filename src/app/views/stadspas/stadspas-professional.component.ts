@@ -21,6 +21,7 @@ export class StadspasProfessionalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.bpm.subscribeForMunicipality();
   }
 
   ngOnDestroy() {

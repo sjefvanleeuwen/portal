@@ -27,7 +27,7 @@ export class StadspasBurgerComponent implements OnInit, OnDestroy {
     }
 
     if (this.bsn) {
-      this.bpm.subscribeForCityPass(this.bsn);
+      this.bpm.subscribeForBsn(this.bsn);
 
       this.model = global.stadspassen.find((pass) => pass.BSN === this.bsn);
     }
