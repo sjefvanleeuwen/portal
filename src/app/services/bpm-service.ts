@@ -72,6 +72,5 @@ export class BPMService {
             message: message,
             data: data,
             processdata: processdata});
-
     }
 }

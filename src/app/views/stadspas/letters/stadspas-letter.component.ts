@@ -35,7 +35,7 @@ export class StadspasLetterComponent {
 
         const salutation = this.model.notificationDataBRP.geslachtsaanduiding === 'M' ? 'Meneer' : 'Mevrouw';
         // tslint:disable-next-line:max-line-length
-        const result = `${salutation} ${this.model.notificationDataBRP.voorletterAanschrijving} ${this.model.notificationDataBRP.voorvoegselGeslachtnaam} ${this.model.notificationDataBRP.geslachtsnaam}`;
+        const result = `${salutation} ${this.model.notificationDataBRP.voorletterAanschrijving} ${this.model.notificationDataBRP.geslachtsnaam}`;
         return result.replace('  ', ' ');
     }
 
@@ -45,7 +45,7 @@ export class StadspasLetterComponent {
         }
 
         // tslint:disable-next-line:max-line-length
-        const result = `${this.model.notificationDataBRP.voorletterAanschrijving} ${this.model.notificationDataBRP.voorvoegselGeslachtnaam} ${this.model.notificationDataBRP.geslachtsnaam}`;
+        const result = `${this.model.notificationDataBRP.voorletterAanschrijving} ${this.model.notificationDataBRP.geslachtsnaam}`;
         return result.replace('  ', ' ');
     }
 
@@ -55,7 +55,7 @@ export class StadspasLetterComponent {
         }
 
         // tslint:disable-next-line:max-line-length
-        const result = `${this.model.notificationDataBRP.partner.voorletterAanschrijving} ${this.model.notificationDataBRP.partner.voorvoegselGeslachtnaam} ${this.model.notificationDataBRP.partner.geslachtsnaam}`;
+        const result = `${this.model.notificationDataBRP.partner.voorletterAanschrijving} ${this.model.notificationDataBRP.partner.geslachtsnaam}`;
         return result.replace('  ', ' ');
     }
 
@@ -65,7 +65,7 @@ export class StadspasLetterComponent {
         }
         const salutation = this.model.notificationDataBRP.geslachtsaanduiding === 'M' ? 'meneer' : 'mevrouw';
         // tslint:disable-next-line:max-line-length
-        const result = `${salutation} ${this.model.notificationDataBRP.voorvoegselGeslachtnaam} ${this.model.notificationDataBRP.geslachtsnaam}`;
+        const result = `${salutation} ${this.model.notificationDataBRP.geslachtsnaam}`;
         return result.replace('  ', ' ');
     }
 

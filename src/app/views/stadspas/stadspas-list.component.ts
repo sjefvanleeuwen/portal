@@ -19,7 +19,7 @@ export class StadspasListComponent {
         }
 
         // tslint:disable-next-line:max-line-length
-        const result = `${stadspas.notificationDataBRP.voorletterAanschrijving} ${stadspas.notificationDataBRP.voorvoegselGeslachtnaam} ${stadspas.notificationDataBRP.geslachtsnaam}`;
+        const result = `${stadspas.notificationDataBRP.voorletterAanschrijving} ${stadspas.notificationDataBRP.geslachtsnaam}`;
         return result.replace('  ', ' ');
     }
 }

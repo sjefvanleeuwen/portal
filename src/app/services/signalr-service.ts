@@ -18,8 +18,6 @@ export class SignalRService {
             .start()
             .catch(err => document.write('Error connecting to signalr eventhub'))
             .then(() => {
-                console.log('after signalr socket connect')
-                //this.hubConnection.invoke('Subscribe', 'topic');
                 this.hubConnection.invoke('Connected');
             });
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, Input } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { AuthService } from '../../services/auth-service';
 
@@ -8,7 +8,7 @@ import { AuthService } from '../../services/auth-service';
   styleUrls: ['./irma.component.scss']
 })
 
-export class IrmaComponent implements OnInit {
+export class IrmaComponent implements OnInit, OnDestroy {
 
   @Input()
   public forActivation: boolean;
@@ -163,14 +163,24 @@ export class IrmaComponent implements OnInit {
   }
 
   ngOnInit() {
-    clearTimeout(this.timer);
-    this.timer = null;
+    if (this.timer != null) {
+      clearTimeout(this.timer);
+      this.timer = null;
+    }
+
     if (this.forActivation) {
       console.log('foractivation:issue');
       this.issue();
     } else {
       console.log('foractivation:disclose');
       this.disclose();
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.timer != null) {
+      clearTimeout(this.timer);
+      this.timer = null;
     }
   }
 }
