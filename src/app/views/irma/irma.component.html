@@ -1,35 +1,35 @@
 <form id="testForm" class="form-horizontal">
 
-    <input title="issue" (click)="doLoginTest()" type=button name='try_irma_btn' id="try_irma_btn" value="login">
+    <!-- <input title="issue" (click)="doLoginTest()" type=button name='try_irma_btn' id="try_irma_btn" value="login">
     <input title="issue" (click)="issue()" type=button name='try_irma_btn' id="try_irma_btn" value="issue">
-    <input title="issue" (click)="disclose()" type=button name='try_irma_btn' id="try_irma_btn" value="disclose">
+    <input title="issue" (click)="disclose()" type=button name='try_irma_btn' id="try_irma_btn" value="disclose"> -->
     
     <div class="container">
         <img src="assets/img/irma/irma_logo_1024px.png" style="width:200px;position:relative;top:30px;left:80px;z-index:10" />
         <div class="row justify-content-center">
           <div class="col-md-9">
             <div class="card-group">
-            <div class="card p-1">
-              <div class="card-body text-center">
-                  <ngx-kjua [text]="JWTTest" [renderAsync]="true" [render]="'image'" [crisp]="true" [minVersion]="1"
-                  [ecLevel]="'H'" [size]="300" [ratio]="undefined" [fill]="'#333'" [back]="'#fff'" [rounded]="0" [quiet]="0"
-                  [mode]="'plain'" [mSize]="30" [mPosX]="50" [mPosY]="100" [label]="'label text'" [fontname]="'sans-serif'"
-                  [fontcolor]="red" [image]="undefined"></ngx-kjua>
-              </div>
-            </div>
-            <div class="card text-white bg-primary py-5" style="width:44%">
-              <div class="card-body text-center">
-                <div *ngIf='!forActivation'>
-                  <h2>Aanmelden</h2>
-                  <p>Deze website vraagt u om in te loggen bij IRMA. Scan hiertoe de QR code met uw mobiele telefoon.</p>
-                  <button class="btn btn-primary active mt-3" type="button">Hulp</button>
+              <div class="card p-1">
+                <div class="card-body text-center">
+                    <ngx-kjua [text]="JWTTest" [renderAsync]="true" [render]="'image'" [crisp]="true" [minVersion]="1"
+                    [ecLevel]="'H'" [size]="300" [ratio]="undefined" [fill]="'#333'" [back]="'#fff'" [rounded]="0" [quiet]="0"
+                    [mode]="'plain'" [mSize]="30" [mPosX]="50" [mPosY]="100" [label]="'label text'" [fontname]="'sans-serif'"
+                    [fontcolor]="red" [image]="undefined"></ngx-kjua>
                 </div>
-                <div *ngIf='forActivation'>
+              </div>
+              <div class="card text-white bg-primary py-5" style="width:44%">
+                <div class="card-body text-center">
+                  <div>
+                    <h2>Aanmelden</h2>
+                    <p>Deze website vraagt u om in te loggen bij IRMA. Scan hiertoe de QR code met uw mobiele telefoon.</p>
+                    <button class="btn btn-primary active mt-3" type="button">Hulp</button>
+                  </div>
+                  <!-- <div>
                     <h2>Activeer uw stadspas</h2>
                     <p>Deze website vraagt u om uw IRMA attributen te delen. Scan hiertoe de QR code met uw mobiele telefoon.</p>
                     <button class="btn btn-primary active mt-3" type="button">Hulp</button>
-                  </div>
-                </div>
+                  </div> -->
+              </div>
             </div>
           </div>
         </div>
