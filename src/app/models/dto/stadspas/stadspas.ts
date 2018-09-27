@@ -30,7 +30,7 @@ export class Stadspas {
         } else if (this.userChoiceAt) {
             return 'Wachten op bevestiging';
         } else if (this.askForInput) {
-            return 'Wachten op gebruiker';
+            return 'Wachten op inwoner';
         } else if (this.requestedAt) {
             return 'Aangevraagd';
         } else {

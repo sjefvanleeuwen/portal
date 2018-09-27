@@ -8,13 +8,24 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'irma',
     pathMatch: 'full'
   },
+  {
+    path: 'login',
+    redirectTo: 'irma',
+    pathMatch: 'full'
+  },
+  // {
+  //   path: '',
+  //   redirectTo: 'dashboard',
+  //   pathMatch: 'full'
+  // },
   {
     path: '404',
     component: P404Component,
@@ -30,7 +41,7 @@ export const routes: Routes = [
     }
   },
   {
-    path: 'login',
+    path: 'professional',
     component: LoginComponent,
     data: {
       title: 'Login Page'
@@ -52,7 +63,8 @@ export const routes: Routes = [
     children: [
       {
         path: 'stadspas',
-        loadChildren: './views/stadspas/stadspas.module#StadspasModule'
+        loadChildren: './views/stadspas/stadspas.module#StadspasModule',
+        canActivate: [AuthGuard]
       },
       {
         path: 'processes',
@@ -64,7 +76,8 @@ export const routes: Routes = [
       },
       {
         path: 'dashboard',
-        loadChildren: './views/dashboard/dashboard.module#DashboardModule'
+        loadChildren: './views/dashboard/dashboard.module#DashboardModule',
+        canActivate: [AuthGuard]
       }
     ]
   }

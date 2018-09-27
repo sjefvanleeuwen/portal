@@ -5,7 +5,7 @@ import { BPMProcessData } from '../../models/dto/bpm/bpm-process';
 import { BPMNotification } from '../../models/dto/bpm/bpm-notification';
 import { Subscription } from 'rxjs';
 import { Topics } from '../../models/topics';
-import { global } from '../../globals';
+import { global } from '../../app.globals';
 
 @Component({
   selector: 'app-stadspas-prof',

@@ -1,7 +1,7 @@
 import ProcessDefinition from './../../models/dto/camunda/ProcessDefinition';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { global } from '../../globals';
+import { global } from '../../app.globals';
 import { NgxSpinnerService} from 'ngx-spinner';
 import { DefaultLayoutComponent } from '../../containers/default-layout/default-layout.component';
 import { SignalRService } from './../../services/signalr-service';

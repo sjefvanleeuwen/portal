@@ -1,8 +1,10 @@
 import { Component, Input, ChangeDetectorRef, OnInit, EventEmitter } from '@angular/core';
-import { navItems } from './../../_nav';
+import { navItemsProf, navItemsInwoner } from './../../_nav';
 import { NotifyService, NotifyPushService } from 'ngx-notify';
-// import { global } from '../../globals';
+import { global } from '../../app.globals';
 import { SignalRService } from './../../services/signalr-service';
+import { Observable } from 'rxjs';
+import { AuthService, User } from '../../services/auth-service';
 // import { Observable } from 'rxjs';
 
 @Component({
@@ -17,23 +19,24 @@ export class DefaultLayoutComponent implements OnInit {
   public HumanTasksProcessed = 0;
   public Tasks = new Array();
   public HumanTask = new EventEmitter<any>();
+  public loggedInUser: User = new User();
 
   constructor(
     private _ns: NotifyService,
     private _nps: NotifyPushService,
     private cdr: ChangeDetectorRef,
-    private signalR: SignalRService) {
+    private signalR: SignalRService,
+    private authService: AuthService) {
     console.log('default layout component constructor');
 
     this.changes = new MutationObserver((mutations) => {
       this.sidebarMinimized = document.body.classList.contains('sidebar-minimized');
     });
 
-    this.changes.observe(<Element>this.element, {
-     attributes: true
-    });
+    this.changes.observe(<Element>this.element, {attributes: true});
   }
-  public navItems = navItems;
+  public navItemsProf = navItemsProf;
+  public navItemsInwoner = navItemsInwoner;
   public sidebarMinimized = true;
   private changes: MutationObserver;
   public element: HTMLElement = document.body;
@@ -123,13 +126,11 @@ export class DefaultLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // const me = this;
-    // this.signalR.hubConnection.on('connected', () => {
-    //   this.signalR.hubConnection.on('publishmessage', this.handlePublishedMessage);
-    //   // subscribe to events, so the user interface can update.
-    //   this.signalR.hubConnection.invoke('Subscribe', 'dashboard-human-tasks');
-    //   this.signalR.hubConnection.invoke('Subscribe', 'human-task-data');
-    // });
+    this.authService.isLoggedInUser.subscribe((u) => {this.loggedInUser = u; console.log('user: ', u); });
+  }
+
+  public logout() {
+    this.authService.logout();
   }
 
   public handlePublishedMessage = (topic: string, message: string, data: string, processdata: string) => {

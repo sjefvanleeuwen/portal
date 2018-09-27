@@ -3,7 +3,7 @@ import { Stadspas } from '../../models/dto/stadspas/stadspas';
 import { BPMService, BPMMessage } from '../../services/bpm-service';
 import { Subscription } from 'rxjs';
 import { Topics } from '../../models/topics';
-import { global } from '../../globals';
+import { global } from '../../app.globals';
 
 @Component({
   selector: 'app-stadspas-burger',
@@ -36,7 +36,7 @@ export class StadspasBurgerComponent implements OnInit, OnDestroy {
       this.model = new Stadspas();
       this.model.BSN =  123456;
       this.model.askForInput = true;
-      this.model.activatedAt = new Date();
+      //this.model.activatedAt = new Date();
       this.model.notificationDataBRP = {};
       this.model.notificationDataBRP.geslachtsaanduiding = 'M';
       this.model.notificationDataBRP.voorvoegselGeslachtnaam = 'van der   ';
