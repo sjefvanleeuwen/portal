@@ -19,15 +19,17 @@ export class StadspasBurgerComponent implements OnInit, OnDestroy {
   constructor(private bpm: BPMService) {
     this.subscription = this.bpm.getMessage()
       .subscribe( msg => this.handleMessage(msg));
-
-    this.bsn = global.bsnBurger;
   }
 
   ngOnInit() {
+    if (global.loggedInUser && global.loggedInUser.isInwoner) {
+      this.bsn = global.loggedInUser.bsn;
+    }
+
     if (this.bsn) {
       this.bpm.subscribeForCityPass(this.bsn);
 
-      this.model = global.stadspassen.find((pass) => pass.BSN === global.bsnBurger);
+      this.model = global.stadspassen.find((pass) => pass.BSN === this.bsn);
     }
 
     // TODO: remove test code

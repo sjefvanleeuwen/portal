@@ -3,5 +3,5 @@ import { User } from './services/auth-service';
 
 export const global = {
     stadspassen: new Array<Stadspas>(),
-    loggedInUser: {}
+    loggedInUser: new User()
 };

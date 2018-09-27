@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { global } from '../app.globals';
 
 export class User {
+    public bsn: number;
     public loggedIn: boolean;
     public isInwoner: boolean;
     public isProfessional: boolean;
@@ -24,6 +25,7 @@ export class AuthService {
   loginInwoner(bsn: number) {
     if (bsn) {
         const user = new User();
+        user.bsn = bsn;
         user.loggedIn = true;
         user.isInwoner = true;
         this.loggedInUser.next(user);

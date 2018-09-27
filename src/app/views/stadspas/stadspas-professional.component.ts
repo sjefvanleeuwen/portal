@@ -62,9 +62,6 @@ export class StadspasProfessionalComponent implements OnInit, OnDestroy {
       case Topics[1] /*'human-task-data'*/: {
         this.model.askForInput = true;
 
-        // TODO: TEST ONLY
-        global.bsnBurger = this.model.BSN;
-
         break;
       }
       case Topics[2] /*'city-pass-municipality'*/: {
