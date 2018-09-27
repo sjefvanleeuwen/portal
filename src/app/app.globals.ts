@@ -1,5 +1,5 @@
 import { Stadspas } from './models/dto/stadspas/stadspas';
-import { User } from './services/auth-service';
+import { User } from './models/dto/user';
 
 export const global = {
     stadspassen: new Array<Stadspas>(),

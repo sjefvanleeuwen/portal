@@ -4,8 +4,8 @@ import { NotifyService, NotifyPushService } from 'ngx-notify';
 import { global } from '../../app.globals';
 import { SignalRService } from './../../services/signalr-service';
 import { Observable } from 'rxjs';
-import { AuthService, User } from '../../services/auth-service';
-// import { Observable } from 'rxjs';
+import { AuthService } from '../../services/auth-service';
+import { User } from '../../models/dto/user';
 
 @Component({
   selector: 'app-dashboard',

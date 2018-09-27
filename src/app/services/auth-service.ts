@@ -2,13 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { global } from '../app.globals';
-
-export class User {
-    public bsn: number;
-    public loggedIn: boolean;
-    public isInwoner: boolean;
-    public isProfessional: boolean;
-}
+import { User } from '../models/dto/user';
 
 @Injectable({
     providedIn: 'root',
