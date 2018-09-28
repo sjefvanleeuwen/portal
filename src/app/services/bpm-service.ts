@@ -37,9 +37,6 @@ export class BPMService {
         this.signalR.hubConnection.on('Connected', () => {
             this.signalR.hubConnection.on('publishmessage', this.handlePublishedMessage);
             // subscribe to events, so the user interface can update.
-            console.log('client subscribing: ' + Topics[0]);
-            console.log('client subscribing: ' + Topics[1]);
-            console.log('client subscribing: ' + Topics[2]);
             this.signalR.hubConnection.invoke('Subscribe', Topics[0]).then(() => {
                 this.signalR.hubConnection.invoke('Subscribe', Topics[1]).then(() => {
                     this.signalR.hubConnection.invoke('Subscribe', `city-pass-${bsn}`);
@@ -55,9 +52,6 @@ export class BPMService {
         this.signalR.hubConnection.on('Connected', () => {
             this.signalR.hubConnection.on('publishmessage', this.handlePublishedMessage);
             // subscribe to events, so the user interface can update.
-            console.log('client subscribing: ' + Topics[0]);
-            console.log('client subscribing: ' + Topics[1]);
-            console.log('client subscribing: ' + Topics[2]);
             this.signalR.hubConnection.invoke('Subscribe', Topics[0]).then(() => {
                 this.signalR.hubConnection.invoke('Subscribe', Topics[1]).then(() => {
                     this.signalR.hubConnection.invoke('Subscribe', Topics[2]);

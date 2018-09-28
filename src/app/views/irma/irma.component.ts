@@ -45,7 +45,8 @@ export class IrmaComponent implements OnInit, OnDestroy {
   doLogin(bsn: string) {
     this.authService.loginInwoner(Number(bsn));
   }
-  doLoginTest(){
+
+  doLoginTest() {
     this.doLogin('123456');
   }
 

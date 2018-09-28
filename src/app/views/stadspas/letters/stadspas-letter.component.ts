@@ -12,17 +12,32 @@ export class StadspasLetterComponent {
     constructor() {
     }
 
-    formatDate(date: Date): string {
-        if (!date) {
-            return '';
+    formatDate(dateString: string): string {
+        let date: Date;
+        try {
+            date = new Date(dateString);
+        } catch {
+            date = new Date();
         }
+
+        if (!date) {
+            date = new Date();
+        }
+
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         return date.toLocaleDateString('nl-NL', options);
     }
 
-    formatDateNoYear(date: Date): string {
+    formatDateNoYear(dateString: string): string {
+        let date: Date;
+        try {
+            date = new Date(dateString);
+        } catch {
+            date = new Date();
+        }
+
         if (!date) {
-            return '';
+            date = new Date();
         }
         const options = { month: 'long', day: 'numeric' };
         return date.toLocaleDateString('nl-NL', options);

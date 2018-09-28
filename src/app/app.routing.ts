@@ -13,7 +13,7 @@ import { AuthGuard } from './auth.guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'irma',
+    redirectTo: 'professional',
     pathMatch: 'full'
   },
   {
