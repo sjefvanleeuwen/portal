@@ -12,8 +12,8 @@
                             <div class="custom-file col-md-6">
                                 <select class="form-control" id="cardtypeInput" name="cardType" [(ngModel)]="model.cardType" #cardtype="ngModel" required>
                                     <option></option>
-                                    <option value="plastic">Plastic pas met QR-code</option>
-                                    <option value="digital">Digitale pas</option>
+                                    <option value="plastic">Plastic pas (met QR-code)</option>
+                                    <option value="digital">Digitale pas (IRMA)</option>
                                 </select>
                                 <div class="invalid-feedback" [hidden]="cardtype.valid || cardtype.pristine">Verplicht veld</div>
                             </div>                    
@@ -30,8 +30,13 @@
     <div class="row justify-content-md-center" *ngIf="model && model.activatedAt">
         <app-stadspas-letter [model]="model"></app-stadspas-letter>
     </div><!--/.row-->
+    <br/>
+    <br/>
     <div class="row justify-content-md-center" *ngIf="model && model.activatedAt">
         <app-irma [forActivation]="true"></app-irma>
     </div><!--/.row-->
+    <br/>
+    <br/>
+    <br/>
 </div>
 
