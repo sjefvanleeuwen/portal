@@ -83,7 +83,8 @@ export class StadspasBurgerComponent implements OnInit, OnDestroy {
   }
 
   private myBrpTopic(): string {
-    return `city-pass-${this.bsn}`;
+//    return `city-pass-${this.bsn}`;
+    return 'city-pass';
   }
 
   private handleMessage(msg: BPMMessage): void {
