@@ -10,7 +10,7 @@
       <a class="nav-link" href="#/dashboard">Dashboard</a>
     </li>
     <li class="nav-item px-3" *ngIf="loggedInUser.loggedIn">
-        <a class="nav-link" href="#" (click)="logout()">Logout</a>
+        <a class="nav-link" href="#/irma" (click)="logout()">Logout</a>
     </li>
     <li class="nav-item px-3" *ngIf="!loggedInUser.loggedIn">
       <a class="nav-link" href="#/">Login</a>

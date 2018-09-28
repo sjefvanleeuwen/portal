@@ -12,7 +12,7 @@
                             <div class="custom-file col-md-6">
                                 <select class="form-control" id="cardtypeInput" name="cardType" [(ngModel)]="model.cardType" #cardtype="ngModel" required>
                                     <option></option>
-                                    <option value="plastic">Plastic pas</option>
+                                    <option value="plastic">Plastic pas met QR-code</option>
                                     <option value="digital">Digitale pas</option>
                                 </select>
                                 <div class="invalid-feedback" [hidden]="cardtype.valid || cardtype.pristine">Verplicht veld</div>

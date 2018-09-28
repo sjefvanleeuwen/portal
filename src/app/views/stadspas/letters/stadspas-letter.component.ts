@@ -87,7 +87,7 @@ export class StadspasLetterComponent {
     formattedAddress1(): string {
         let address: any;
         if (this.model && this.model.notificationDataBRP) {
-            address = this.model.notificationDataBRP.verblijfadres;
+            address = this.model.notificationDataBRP.verblijfsadres;
         }
 
         return address ? `${address.straatnaam} ${address.huisnummer}` : '';
@@ -96,7 +96,7 @@ export class StadspasLetterComponent {
     formattedAddress2(): string {
         let address: any;
         if (this.model && this.model.notificationDataBRP) {
-            address = this.model.notificationDataBRP.verblijfadres;
+            address = this.model.notificationDataBRP.verblijfsadres;
         }
 
         return address ? `${address.postcode} ${address.woonplaatsnaam.toUpperCase()}` : '';
