@@ -23,7 +23,7 @@ export class IrmaComponent implements OnInit, OnDestroy {
   p1: string;
   p2: string;
 
-  irma_api_server_address = 'http://10.109.0.178:8088';
+  irma_api_server_address = 'http://wigo4it-dev.westeurope.azurecontainer.io:8080';
 
   iat = Math.round((new Date()).getTime() / 1000) + 120;
 
@@ -51,7 +51,7 @@ export class IrmaComponent implements OnInit, OnDestroy {
   }
 
   getProof(token: string) {
-    const s: string = 'http://10.109.0.178:8088/api/v2/verification/' + token + '/getproof';
+    const s: string = this.irma_api_server_address + '/api/v2/verification/' + token + '/getproof';
     this.httpClient.get(s, {headers: this.headers2, responseType: 'text'}).subscribe((result: string) => {
       const jwt = JSON.parse(atob(result.split('.')[1]));
       this.doLogin(jwt.attributes['irma-demo.nijmegen.bsn.bsn']);
@@ -86,7 +86,7 @@ export class IrmaComponent implements OnInit, OnDestroy {
     const p1 = btoa(JSON.stringify(header)).replace(/=/g, '');
     const p2 = btoa(JSON.stringify(payload)).replace(/=/g, '');
 
-    this.httpClient.post('http://0.0.0.0:8088/api/v2/verification',
+    this.httpClient.post(this.irma_api_server_address + '/api/v2/verification',
       p1 + '.' + p2 + '.', {headers: this.headers}).subscribe((result: any) => {
           const clone = JSON.parse(JSON.stringify(result));
           result.u = this.irma_api_server_address  + '/api/v2/verification/' + result.u;
@@ -112,7 +112,7 @@ export class IrmaComponent implements OnInit, OnDestroy {
   }
 
   pollForScan(clone: any) {
-    this.httpClient.get('http://10.109.0.178:8088/api/v2/verification/' + clone.u + '/status?' + Math.random())
+    this.httpClient.get(this. irma_api_server_address + '/api/v2/verification/' + clone.u + '/status?' + Math.random())
     .subscribe((innerResult: Object) => {
       if (innerResult === 'DONE') {
         // get results from IRMA API server
@@ -159,7 +159,7 @@ export class IrmaComponent implements OnInit, OnDestroy {
     this.p1 = btoa(JSON.stringify(header));
     this.p2 = btoa(JSON.stringify(payload));
 
-    this.httpClient.post('http://0.0.0.0:8088/api/v2/issue',
+    this.httpClient.post(this.irma_api_server_address + '/api/v2/issue',
       this.p1 + '.' + this.p2 + '.', {headers: this.headers}).subscribe((result: any) => {
           result.u = this.irma_api_server_address  + '/api/v2/issue/' + result.u;
           this.JWTTest = JSON.stringify(result);
