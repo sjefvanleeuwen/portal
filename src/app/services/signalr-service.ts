@@ -6,19 +6,49 @@ import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
   })
 export class SignalRService {
     hubConnection: HubConnection;
+    auth: HubConnection;
+
+    token = '';
+
+    getAccessToken(userName: string, password: string) {
+        this.auth
+        .start()
+        .catch(err => document.write('Error connecting to signalr authenticationhub'))
+        .then(() => {
+            this.auth.invoke('authenticate', userName, password).then((user) => {
+                console.log('authenticate token: ' + user.token);
+                this.token = user.token;
+                this.hubConnection = new HubConnectionBuilder()
+                    .withUrl('http://localhost:5051/eventhub',
+                    {
+                        accessTokenFactory: () => this.token
+                    })
+                .build();
+                this.hubConnection
+                .start()
+                .catch(err => document.write('Error connecting to signalr eventhub'))
+                .then(() => {
+                    this.auth.invoke('connected');
+                });
+            });
+        });
+    }
 
     constructor() {
-        this.hubConnection = new HubConnectionBuilder()
-            .withUrl('http://localhost:5051/eventhub')
-            .build();
+        console.log('SignalRService Constructed');
+        this.auth = new HubConnectionBuilder()
+        .withUrl('http://localhost:5051/authenticationhub')
+        .build();
     }
 
     public connect(): void {
-        this.hubConnection
-            .start()
-            .catch(err => document.write('Error connecting to signalr eventhub'))
-            .then(() => {
-                this.hubConnection.invoke('Connected');
-            });
+        console.log('signalRService connect()');
+        this.getAccessToken('serviceaccount', 'test');
+        // this.hubConnection
+        //     .start()
+        //     .catch(err => document.write('Error connecting to signalr eventhub'))
+        //     .then(() => {
+        //         this.hubConnection.invoke('Connected');
+        //     });
     }
 }

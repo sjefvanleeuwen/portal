@@ -3,4 +3,5 @@ export class User {
     public loggedIn: boolean;
     public isInwoner: boolean;
     public isProfessional: boolean;
+    public token: string;
 }
