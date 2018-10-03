@@ -4,4 +4,6 @@ export class User {
     public isInwoner: boolean;
     public isProfessional: boolean;
     public token: string;
+    public userName: string;
+    public password: string;
 }

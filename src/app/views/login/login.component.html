@@ -6,24 +6,24 @@
           <div class="card-group">
             <div class="card p-4">
               <div class="card-body">
-                <form>
+                <form #loginForm="ngForm" (ngSubmit)="login()" class="form-horizontal ng-pristine ng-valid">
                   <h1>Login</h1>
-                  <p class="text-muted">Aanmelden met uw account</p>
+                  <p class="text-muted">Aanmelden met uw account (u/l: serviceaccount/test)</p>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-user"></i></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Gebruikersnaam" autocomplete="username" required>
+                    <input [(ngModel)]="model.userName" name="userName" #userName="ngModel" type="text" class="form-control" placeholder="Gebruikersnaam" autocomplete="username" required>
                   </div>
                   <div class="input-group mb-4">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-lock"></i></span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Wachtwoord" autocomplete="current-password" required>
+                    <input [(ngModel)]="model.password" name="password"  #password="ngModel" type="password" class="form-control" placeholder="Wachtwoord" autocomplete="current-password" required>
                   </div>
                   <div class="row">
                     <div class="col-5">
-                      <button (click)="login()" type="button" class="btn btn-primary px-4">Login</button>
+                      <button type="submit" class="btn btn-primary px-4" [disabled]="!loginForm.form.valid">Login</button>
                     </div>
                     <div class="col-7 text-right">
                       <button type="button" class="btn btn-link px-0">Wachtwoord vergeten?</button>

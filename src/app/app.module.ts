@@ -46,10 +46,10 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { StadspasModule } from './views/stadspas/stadspas.module';
 import { CamundaModule } from './views/camunda/camunda.module';
 import { IrmaModule } from './views/irma/irma.module';
-import { IrmaComponent } from './views/irma/irma.component';
+import { LoginModule } from './views/login/login.module';
 
 @NgModule({
-  imports: [
+    imports: [
     BrowserModule,
     NotifyModule.forRoot({
       options: { },
@@ -71,15 +71,15 @@ import { IrmaComponent } from './views/irma/irma.component';
     StadspasModule,
     CamundaModule,
     IrmaModule,
-    HttpClientModule
+    HttpClientModule,
+    LoginModule
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
-    LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   providers: [
     {
