@@ -23,7 +23,7 @@ export class IrmaComponent implements OnInit, OnDestroy {
   p1: string;
   p2: string;
 
-  irma_api_server_address = 'http://wigo4it-dev.westeurope.azurecontainer.io:8080';
+  irma_api_server_address = 'http://wigo4it-k8s.464b0cafc5de44b9bc20.westeurope.aksapp.io:8088';
 
   iat = Math.round((new Date()).getTime() / 1000) + 120;
 
