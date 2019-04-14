@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { global } from '../app.globals';
 import { User } from '../models/dto/user';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -37,7 +38,7 @@ export class AuthService {
 
   loginProfessional(userName: string, password: string) {
     this.auth = new HubConnectionBuilder()
-      .withUrl('http://localhost:5051/authenticationhub')
+      .withUrl(environment.authHub)
       .build();
     this.auth
       .start()

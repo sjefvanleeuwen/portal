@@ -2,6 +2,7 @@ import { AuthService } from './auth-service';
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { global } from '../app.globals';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -16,7 +17,7 @@ export class SignalRService {
     public connect(): void {
         console.log('signalRService connect()');
         this.hubConnection = new HubConnectionBuilder()
-            .withUrl('http://localhost:5051/eventhub',
+            .withUrl(environment.eventHub,
             {
                 accessTokenFactory: () => global.loggedInUser.token
             })
