@@ -1,0 +1,109 @@
+<div class="animated fadeIn">
+  <input type=button (click)="testTaskCompletion()">
+  <h1>Processen</h1>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Start een proces</strong>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="countryForm" action="" method="post" class="form-horizontal ng-pristine ng-valid">
+            <div class="card-body">
+              <div class="col-md-12">
+                <div class="alert alert-warning" role="alert">
+                  <h4><i class="fa fa-warning"></i> Waarschuwing!</h4>
+                  <p>Dit formulier wordt gebruikt om processen technisch door te kunnen testen. Het is niet de
+                    bedoeling deze te gebruiken in een productie omgeving door de eindgebruiker</p>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2 col-form-label" for="processInput">payload</label>
+              <div class="col-md-9">
+                <input class="form-control" id="text-input" name="text-input" placeholder="Text" type="text" value='{"topicid":"topic","notificationmessage":"startprocessmessage","handleUserResponse":true}'>
+                <span class="help-block small">De payload moet in JSON formaat zijn als key/value pair
+                  format</span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2 col-form-label" for="processInput">business key</label>
+              <div class="col-md-9">
+                <input class="form-control" id="text-input" name="text-input" placeholder="Voor uw kenmerk in" type="text"
+                  value=''>
+                <span class="help-block small">De business key bevat uw unieke referentie
+                  format</span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2 col-form-label" for="processInput">proces</label>
+              <div class="col-md-9">
+                <div (click)="handleclick()" class="input-group-prepend"><span class="input-group-text"><i class="fa fa-user"></i></span></div>
+                <select #selectedValue formControlName="processControl" class="form-control" id="selectProcess" name="selectProcess">
+                  <option [value]="processDefinition" *ngFor="let processDefinition of processDefinitions">{{processDefinition.name}}</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button (click)="start(selectedValue.selected)" type="submit" class="btn btn-sm btn-success"><i class="fa fa-dot-circle-o"></i>
+            Start</button>
+          <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-14">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> Human Tasks</div>
+        <div class="card-body">
+          <table class="table table-responsive-sm">
+            <thead>
+              <tr>
+                <th>Topic</th>
+                <th>Data</th>
+                <th>Task Id</th>
+                <th>Description</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let task of layout.Tasks; let i = index">
+                <td>{{task.topic}}</td>
+                <td>{{task.message}}</td>
+                <td>{{task.processdata.Id}}</td>
+                <td>{{task.processdata.Name}}</td>
+                <td>
+                  <span class="badge badge-success">Active</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+  <!--              
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#">Prev</a>
+            </li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">4</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul> -->
+        </div>
+      </div>
+    </div>
+</div>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="ball-clip-rotate-pulse"></ngx-spinner>

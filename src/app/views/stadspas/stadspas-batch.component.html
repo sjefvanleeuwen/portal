@@ -1,0 +1,186 @@
+<div class="animated fadeIn">
+    <h1>Stadspassen aanmaken via bestand</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Bestand selecteren</strong>
+                </div>
+                <div class="card-body">
+                    <form action="" method="post" class="form-horizontal ng-pristine ng-valid">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="validatedCustomFile">Bestand</label>
+                            <div class="custom-file col-md-9">
+                                <input type="file" class="custom-file-input" id="validatedCustomFile" required="">
+                                <label class="custom-file-label" for="validatedCustomFile">Kies bestand...</label>
+                                <div class="invalid-feedback">U dient een bestand te selecteren</div>
+                            </div>
+                        </div>                    
+                    </form>
+                    <!-- <form action="" method="post" class="form-horizontal ng-pristine ng-valid was-validated">
+                            <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="validatedCustomFile">Bestand</label>
+                            <div class="custom-file col-md-9">
+                                <input type="file" class="custom-file-input" id="validatedCustomFile" required="">
+                                <label class="custom-file-label" for="validatedCustomFile">Kies bestand...</label>
+                                <div class="invalid-feedback">U dient een bestand te selecteren</div>
+                            </div>
+                        </div>                    
+                    </form> -->
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-dot-circle-o"></i> Start verwerking</button>
+                    <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+                </div>
+            </div>            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    Verwerkingslijst
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="callout callout-info">
+                                        <small class="text-muted">Totaal</small>
+                                        <br>
+                                        <strong class="h4">103</strong>
+                                    </div>
+                                </div><!--/.col-->
+                                <div class="col-sm-4">
+                                    <div class="callout callout-success">
+                                        <small class="text-muted">Succesvol</small>
+                                        <br>
+                                        <strong class="h4">98</strong>
+                                    </div>
+                                </div><!--/.col-->
+                                <div class="col-sm-4">
+                                    <div class="callout callout-danger">
+                                        <small class="text-muted">UItval</small>
+                                        <br>
+                                        <strong class="h4">5</strong>
+                                    </div>
+                                </div><!--/.col-->
+                            </div><!--/.row-->
+                        </div><!--/.row-->
+                        <br>
+                        <table class="table table-responsive-sm table-hover table-outline mb-0">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="text-left">BSN</th>
+                                <th class="text-left">Naam</th>
+                                <th class="text-left">Datum uitgifte</th>
+                                <th class="text-left">Datum keuze</th>
+                                <th class="text-center">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-left">
+                                    <div>41986914</div>
+                                </td>
+                                <td class="text-left">
+                                    <div>A. de Inwoner</div>
+                                </td>
+                                <td class="text-left">
+                                </td>
+                                <td class="text-left">
+                                </td>
+                                <td class="text-center align-middle">
+                                    <span class=""><img src="./assets/img/loaders/loader-md.svg"/></span>
+                                    <div class="small text-muted">
+                                        <span>Processing</span>
+                                    </div>
+                                </td>
+                            </tr>                        
+                            <tr>
+                                <td class="text-left">
+                                    <div>41986914</div>
+                                </td>
+                                <td class="text-left">
+                                    <div>A. de Inwoner</div>
+                                </td>
+                                <td class="text-left">
+                                    <div>24-09-2018</div>
+                                </td>
+                                <td class="text-left">
+                                </td>
+                                <td class="text-center align-middle">
+                                    <span class="badge badge-danger"><i class="cui-circle-x h4"></i></span>
+                                    <div class="small text-muted">
+                                        <span>Uitval</span>
+                                    </div>
+                                </td>
+                            </tr>                        
+                            <tr>
+                                <td class="text-left">
+                                    <div>41986914</div>
+                                </td>
+                                <td class="text-left">
+                                    <div>A. de Inwoner</div>
+                                </td>
+                                <td class="text-left">
+                                    <div>24-09-2018</div>
+                                </td>
+                                <td class="text-left">
+                                </td>
+                                <td class="text-center align-middle">
+                                    <span class="badge badge-info text-light"><i class="cui-circle-check h4"></i></span>
+                                    <div class="small text-muted">
+                                        <span>Uitgegeven</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">
+                                    <div>41986914</div>
+                                </td>
+                                <td class="text-left">
+                                    <div>A. de Inwoner</div>
+                                </td>
+                                <td class="text-left">
+                                    <div>24-09-2018</div>
+                                </td>
+                                <td class="text-left">
+                                    <div>27-09-2018</div>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <span class="badge badge-success"><i class="cui-credit-card h4"></i></span>
+                                    <div class="small text-muted">
+                                        <span>Fysieke pas</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">
+                                    <div>41986914</div>
+                                </td>
+                                <td class="text-left">
+                                    <div>A. de Inwoner</div>
+                                </td>
+                                <td class="text-left">
+                                    <div>24-09-2018</div>
+                                </td>
+                                <td class="text-left">
+                                    <div>28-09-2018</div>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <span class="badge badge-success"><i class="cui-phone h4"></i></span>
+                                    <div class="small text-muted">
+                                        <span>Digitale pas</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><!--/.col-->
+        </div><!--/.row-->
+    </div>
+</div>

@@ -1,1 +1,44 @@
 // Here you can add other styles
+.img-avatar{
+    border: 1px solid #ddd;
+}
+
+.bg-besturingslaag{
+    background-color: #ffaaaa;
+}
+
+.bg-integratielaag{
+    background-color: #f8f4aa;
+}
+
+.bg-servicelaag{
+    background-color: #aaeeaa;
+}
+
+.bg-gegevenslaag{
+    background-color: #cccccc;
+}
+
+.brand-legend {
+    margin-bottom: 1.5em;
+    @extend .small;
+    @extend .text-uppercase;
+    @extend .text-muted;
+    @extend .text-center;
+} 
+
+.brand-card + .brand-legend {
+    margin-top: -1.5em;
+}
+
+.card-footer .btn {
+    margin-right: 8px;
+}
+
+.form-group {
+    height: 3rem;
+}
+
+.btn {
+    font-size: 1.1em;
+}

@@ -1,10 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { NotifyModule } from 'ngx-notify';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -40,9 +43,20 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
+import { StadspasModule } from './views/stadspas/stadspas.module';
+import { CamundaModule } from './views/camunda/camunda.module';
+import { IrmaModule } from './views/irma/irma.module';
+import { LoginModule } from './views/login/login.module';
+
 @NgModule({
-  imports: [
+    imports: [
     BrowserModule,
+    NotifyModule.forRoot({
+      options: { },
+      notify: {
+          progress: true
+      }
+    }),
     AppRoutingModule,
     AppAsideModule,
     AppBreadcrumbModule.forRoot(),
@@ -50,22 +64,29 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     AppHeaderModule,
     AppSidebarModule,
     PerfectScrollbarModule,
+    NgxSpinnerModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    StadspasModule,
+    CamundaModule,
+    IrmaModule,
+    HttpClientModule,
+    LoginModule
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
-    LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
-  providers: [{
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    }
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

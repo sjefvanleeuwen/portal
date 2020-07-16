@@ -1,5 +1,10 @@
 # Portal system for fieldlab
+Portal system for fieldlab in Angular.
 
-Portal system for fieldlab in Angular. 
+## Status
 
-Under construction.
+Experimental
+
+
+
+[![IMAGE ALT TEXT HERE](./doc/img/video.png)](https://youtu.be/LTDXfOUNI44)

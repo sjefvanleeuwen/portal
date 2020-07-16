@@ -4,5 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  eventHub: "http://192.168.99.102:5051/eventhub",
+  authHub: "http://192.168.99.102:5051/authenticationhub"
 };

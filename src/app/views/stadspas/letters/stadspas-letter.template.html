@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8" /> <!-- first element so that the encoding is applied to the title etc. -->
+    <title>Test document – version 1.0</title>
+    <link rel="stylesheet" href="stadspas-letter.template.css" />
+  </head>
+
+  <body style="page-orientation: portrait">
+    <p>
+     <img src="https://mirrors.creativecommons.org/presskit/logos/cc.logo.large.png" style="width:250px"/>
+    </p>
+    <header> 
+      <address class="return-address">
+        <span data-bind="text: voornamen"></span><span data-bind="text: voorvoegselGeslachtnaam"></span><span data-bind="text: geslachtnaam"></span>
+        <span data-bind="text: straatnaam"></span><span data-bind="text: huisnummer"></span><span data-bind="text: huisletter"></span>
+        <span data-bind="text: postcode"></span><span data-bind="text: woonplaatsnaam"></span>    
+      </address>
+
+      Datum: <span data-bind="text: sydate"></span>
+    </header>
+
+    <h1>
+      toekenning stadspas
+    </h1>
+<br>
+    <div class="content">
+        <p>
+          Beste <span data-bind="text: voornamen"></span><span data-bind="text: voorvoegselGeslachtnaam"></span><span data-bind="text: geslachtnaam"></span>,
+          
+          Op <span data-bind="text: sydate"></span> is het recht op een stadspas 2019 vastgesteld.
+
+          Wat is het besluit?
+          Er is besloten dat de volgende personen recht hebben op een stadspas voor 2019:
+
+          <span data-bind="text: voornamen"></span><span data-bind="text: voorvoegselGeslachtnaam"></span><span data-bind="text: geslachtnaam"></span><span data-bind="text: geboortedatum"></span>
+          <span data-bind="text: partner voornamen"></span><span data-bind="text: partner voorvoegselGeslachtnaam"><span data-bind="text: partner geslachtnaam"></span></span><span data-bind="text: partner geboortedatum"></span>
+          
+          U komt in aanmerking voor de stadspas omdat uw inkomen onder de inkomensgrens van 115% van de bijstandsnorm is vastgesteld. 
+          Het recht op de stadspas wordt jaarlijks verlengd. Heeft u al een stadspas? Dan wordt deze voor 2019 automatisch verlengd.
+          U bent verplicht om wijzigingen in uw gezins-, vermogens-, of inkomenssituatie door te geven.
+          Als blijk dat u onvolledige of onjuiste gegevens doorgeeft, dan kunnen wij uw stadspas en die van uw gezinsleden blokkeren. U kunt de pas dan niet meer gebruiken.
+
+          Heeft u gekozen voor de digitale pas volg dan de instructies in de stadspas app. 
+          Indien u heeft gekozen voor de plastic versie dan krijgt u deze binnen drie werkdagen thuis gestuurd.
+          
+          Heeft u nog vragen?
+          Voor meer informatie over de stadspas neemt u contact op met de afdeling Sociale Zaken en Werkgelegenheid. U kunt hiervoor bellen met het nummer 14 023.
+          U kunt ook mailen naar klantenservice@haarlem.nl. Meer informatie kunt u vinden op www.haarlem.nl.
+
+          Met vriendelijke groet,
+          Namens burgemeester en wethouders,
+
+          Managernaam
+          Manager afdeling stadspas
+
+          Dit documemnt is automatisch aangemaakt. Daarom ziet u geen handtekening.
+
+          Waar staat dit in de wet?
+          Beleidsregels Stadspas Haarlem
+
+          Bent u het niet eens met het besluit?
+          Neemt u dan eerst contact op met de afdeling Sociale Zaken en Werkgelegenheid.
+
+          Blijft u het oneens? U kunt dan bezwaar maken tot uiterlijk 6 weken na de datum van dit besluit. Dat kan op 2 maieren:
+          1. Digitaal via onze website www.haarlem.nl/bezwaar
+          2. met een brief naar het volgende adres:
+          Gemeente Haarlem afdeling Sociale Zaken en Werkgelegenheid
+          Postbus 511 
+          2003 PB Haarlem
+          
+        </p>
+      </div class="content">
+
+  </body>
+
+</html>
